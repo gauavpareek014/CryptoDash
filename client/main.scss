@@ -1,0 +1,55 @@
+/* CSS declarations go here */
+
+$red : red;
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  font-size: 62.5%;
+}
+body{
+  color: #555555;
+  font-family: Helvetica,Arial,sans-serif;
+}
+h1{
+  font-weight: 300;
+  font-size: 2.4rem;
+}
+.title-bar{
+  background: #e35557;
+  color: #ffffff;
+}
+.wrapper{
+  margin: 0 auto;
+  max-width: 90rem;
+  padding: 1.3rem;
+}
+.menus{
+  font-size: 15px;
+  float: right;
+  margin-top: -20px;
+}
+
+.tabsCustom{
+  padding: 3.0rem;
+  font-size: 1.5rem;
+}
+
+.carouselCustom{
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.buySellPayment{
+  padding: 1rem;
+}
+
+.coinLabel{
+  align-content: center;
+}
+
+.customForm{
+  padding: 1.5rem;
+}
