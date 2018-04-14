@@ -38,11 +38,15 @@
               stroke-width: 0.75px;
             }
 
-            .line.close{
+            .line.BTC{
               stroke: steelblue;
             }
+            
+            .line.ETH{
+              stroke: indianred;
+            }
 
-            .summary.Close {
+            .summary.BTC {
               color: steelblue;
             }
 
@@ -54,7 +58,7 @@
               stroke: indianred;
             }
 
-            .summary.Volume {
+            .summary.ETH {
               color: indianred;
             }
 
@@ -123,7 +127,7 @@
     </head>
     
     <body>
-        <h1>Bitcoin prices and trading volumes (09/01/17 - 02/11/18)</h1>
+        <h1>Bitcoin vs. Ethereum Price Comparison (09/01/2017 - 02/11/2018)</h1>
         
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
         
@@ -165,27 +169,19 @@
         var main = svg.append("g")
             .attr("transform", "translate(" + main_margin.left + "," + main_margin.top + ")");
 
-        //Create the right-hand side chart lengend area, where we can switch the lines.    
-        var legend = svg.append("g")
-        .attr("transform", "translate(" + (width - legend_width) + "," + main_margin.top + ")");
-
         //Create the bottom mini chart area, where we place the chart brush
         var mini = svg.append("g")
             .attr("transform", "translate(" + mini_margin.left + "," + mini_margin.top + ")");
 
-        //Fetch the ASX Price and Volume data. After getting all data, we draw the lines and axies
-        d3.csv("historical_data_bitcoin.csv", function(error, data) {
+        //Fetch the BTC and ETH price data. After getting all data, we draw the lines and axies
+        d3.csv("historical_data_bitcoin_ethereum.csv", function(error, data) {
 
           //we need to convert the type of data variable to float or date
           data.forEach(function(d) {   
             d.Date = parseDate(d.Date);
-            d.Close = parseFloat(d.Close);
-            d.Volume = parseInt(d.Volume);
-            d.High = parseFloat(d.High);
-            d.Low = parseFloat(d.Low)
+            d.BTC = parseFloat(d.BTC);
+            d.ETH = parseFloat(d.ETH);
           });
-            
-          console.log(data);
 
           //we need to sort those data in ascending order by date
           data.sort(function(a, b) {
@@ -200,59 +196,39 @@
             .x(mini_x)
             .on("brush", brushed);
 
-          //The set the maximum value of left Y axis as the Hightest price and the lowest value as the minimum prices 
+          //The set the maximum value of left Y axis as the hightest price and the lowest value as the minimum prices 
           var maxY = d3.max(data, function(d) {
            // Return max price value
-              return d.High; });
+              return d.BTC; });
           var minY = d3.min(data, function(d) {
-              return d.Low;
+              return d.ETH;
           });
 
-          //Create left Y axis and right Y axis. Left Y axis is the price and right axis is the volume
+          //Create Y axis, Y axis is the price
           var scaleY1 = d3.scale.sqrt().range([main_height, 0]).domain([minY, maxY]);
-          var scaleY2 = d3.scale.sqrt().range([main_height, 0]).domain(d3.extent(data, function(d) { return d.Volume; }));
 
-          //Left Y axis and right Y axis have their own scale individually
+          //Left Y axis has its own scale
           var miniScaleY1 = d3.scale.sqrt().range([mini_height, 0]).domain(scaleY1.domain());
-          var miniScaleY2 = d3.scale.sqrt().range([mini_height, 0]).domain(scaleY2.domain());
 
           //Create the lines path array, where store all line settings
           var pathes = [
-                        {name:'High',
-                         visible:false,
-                         pathClass:"line high",
-                         x: 'Date',
-                         y: 'High',
-                         scale: scaleY1,
-                         miniScale: miniScaleY1,
-                         focusClass: 'y0'},
-              
-                         {name:'Low',
-                          visible:false,
-                          pathClass:"line low",
-                          x: 'Date',
-                          y: 'Low',
-                          scale: scaleY1,
-                          miniScale: miniScaleY1,
-                          focusClass: 'y0'},
-              
-                        {name:'Close',
+                        {name:'Bitcoin (BTC)',
                          visible:true,
-                         pathClass:"line close",
+                         pathClass:"line BTC",
                          x: 'Date',
-                         y: 'Close',
+                         y: 'BTC',
                          scale: scaleY1,
                          miniScale: miniScaleY1,
                          focusClass: 'y0'},
               
-                         {name:'Volume',
-                          visible:true,
-                          pathClass:"line volume",
-                          x: 'Date',
-                          y: 'Volume',
-                          scale: scaleY2,
-                          miniScale: miniScaleY2,
-                          focusClass: 'y1'}
+                        {name:'Ethereum (ETH)',
+                         visible:true,
+                         pathClass:"line ETH",
+                         x: 'Date',
+                         y: 'ETH',
+                         scale: scaleY1,
+                         miniScale: miniScaleY1,
+                         focusClass: 'y0'},   
               ];
 
         //Create the main lines accessor function object
@@ -283,18 +259,15 @@
         //Axis variables
           var main_xAxis = d3.svg.axis()
               .scale(main_x)
-              .tickFormat(d3.time.format("%d/%m/%y"))
+              .tickFormat(d3.time.format("%m/%d/%y"))
               .orient("bottom");
           var mini_xAxis = d3.svg.axis()
               .scale(mini_x)
-              .tickFormat(d3.time.format("%d/%m/%y"))
+              .tickFormat(d3.time.format("%m/%d/%y"))
               .orient("bottom");
           var main_yAxisLeft = d3.svg.axis()
             .scale(scaleY1)
             .orient("left");
-            main_yAxisRight = d3.svg.axis()
-            .scale(scaleY2)
-            .orient("right");
 
           //Create a overlay rect to catch the mouse movement when it move over the chart
           main.append("rect")
@@ -340,7 +313,7 @@
               .attr("transform", "translate(0," + main_height + ")")
               .call(main_xAxis);
 
-         //Add the Y axises to main chart area
+         //Add the Y axise to main chart area
           main.append("g")
               .attr("class", "y axis axisLeft")
               .call(main_yAxisLeft)
@@ -350,20 +323,6 @@
               .attr("dy", ".71em")
               .style("text-anchor", "end")
               .text("Price ($)");
-
-          //Only display the right Y axis if the volume data is present
-          if (pathes[3].visible) {
-            main.append("g")
-              .attr("class", "y axis axisRight")
-              .attr("transform", "translate(" + main_width + ", 0)")
-              .call(main_yAxisRight)
-            .append("text")
-              .attr("transform", "rotate(-90)")
-              .attr("y", -12)
-              .attr("dy", ".71em")
-              .style("text-anchor", "end")
-              .text("Volume");
-          }
 
           //Add the x axis to the mini chart area
           mini.append("g")
@@ -400,8 +359,7 @@
               .style("display", "none");
           focus.append("line")
               .attr("class", "x")
-              .attr("y1",scaleY2(0))
-              .attr("y2",scaleY2(0) - main_height)
+              .attr("y1",scaleY1(0))
               .attr("pointer-events", "none");
 
 
@@ -409,80 +367,6 @@
           var popup = d3.select('body').append('div').attr('id',"popup").attr("opacity", 0).style("left", "200px")			 
             .style("top", "200px");;
           popup.append("text").attr("class", "popup date").attr("x", 20).attr("y", 27);
-
-          //Create the legend text area on the right top
-          var legend_text = legend.selectAll('g')
-            .data(pathes)
-            .enter()
-            .append('g')
-            .attr('class', 'legend');
-
-            //Create the switch button for each line.
-            legend_text.append("rect")
-            .attr("width", 10)
-            .attr("height", 10)
-            .attr('x', 0)
-            .attr('y', function(d, n) {
-                return (33 + n * 15);
-            })
-            .attr("class",function(d) {
-                return d.visible ? 'legend ' + d.name : 'invisible'; 
-              })
-            .on("click", function(d){
-             // On click make d.visible 
-                d.visible = !d.visible;
-                 // If array key for this data selection is "visible" = true then make it false, if false then make it true
-
-                //Switch on or off the right-hand Y axis
-                if (d.name == 'Volume') {
-                    d.visible ? main.select('.axisRight').attr('opacity', 1) :  main.select('.axisRight').attr('opacity', 0);
-                }
-
-                //Open the curtain
-                curtain.attr('width', main_width);
-
-                //Redraw the lines in the main chart area
-                main.selectAll("path")
-                .attr("d", function(d){
-                   return d.visible ? main_line(d) : null;
-                });
-
-                //Reset the legend text color
-                legend_text.select("rect")
-                  .attr("class",function(d) {
-                    return d.visible ? 'legend ' + d.name : 'invisible'; 
-                  });
-                legend_text.select("text")
-                .attr("class",function(d) {
-                  return d.visible ? 'legend ' + d.name : 'invisible'; 
-                });
-
-                //Reset the popup text color
-
-               // setPopupClass();
-
-                //Close the curtain gradually
-                t = curtain.transition()
-                .delay(750)
-                .duration(6000)
-                .ease('linear');
-
-                t.attr('width', 0);
-
-              });
-
-            //Add the legend text
-            legend_text.append('text')
-            .attr('class', function(d) {
-                return d.visible ? 'legend ' + d.name : 'invisible';
-            })
-            .attr('x', 20)
-            .attr('y', function(d, n) {
-                return (42 + n * 15);
-            })
-            .text(function(d) {
-                return d.name;
-            });
 
           //Close the curtain gradually
           var t = curtain.transition()
@@ -507,12 +391,18 @@
                 }
             }
             popup.style("left", left + "px")			 
-            .style("top", "80px"); 
-
+            .style("top", "80px");
+              
+            const numberWithCommas = (x) => {
+              var parts = x.toString().split(".");
+              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              return parts.join(".");
+            }
+            
             var tipHtml = '<div style="color: orange;">' + formatDate(d.Date) + '</div>';
             pathes.forEach(function(path) {
                 if (path.visible) {
-                    tipHtml += '<div class="summary ' + path.name +'">' + path.name + ": $" + d[path.y].toLocaleString(undefined, { minimumFractionDigits: 2}) + '</div>';
+                    tipHtml += '<div class="summary ' + path.y +'">' + path.name + ": $" + d[path.y].toLocaleString(undefined, { minimumFractionDigits: 2}) + '</div>';
                 }
             });
 

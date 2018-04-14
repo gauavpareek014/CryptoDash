@@ -13,7 +13,6 @@ if (Meteor.isServer) {
     });
 }
 
-
 Meteor.methods({
     'userprofile.insert'(firstName, lastName, contact, address,id) {
         check(firstName, String);
