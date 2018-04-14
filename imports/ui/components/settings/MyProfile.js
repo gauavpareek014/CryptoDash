@@ -18,6 +18,12 @@ export default class MyProfile extends React.Component{
         let address;
         let contact;
         let id;
+        let emailAddress;
+
+        if(Meteor.user()){
+             emailAddress = Meteor.user().emails[0].address;
+        }
+
         this.userData.map(function(data){
             id = data._id;
             firstName = data.firstName;
@@ -26,7 +32,9 @@ export default class MyProfile extends React.Component{
             address = data.address;
             Session.set("UserProfileId",id);
         });
+
         this.state = {
+            email:emailAddress,
             _id:id,
             fName:firstName,
             lName:lastName,
@@ -46,7 +54,7 @@ export default class MyProfile extends React.Component{
         const contact = ReactDOM.findDOMNode(this.refs.contact).value.trim();
         const address = ReactDOM.findDOMNode(this.refs.address).value.trim();
 
-        if(contact.match(/\d/g).length===10){
+        if(contact.match(/\d/g) && contact.length == 10){
             Meteor.call('userprofile.insert', firstName,lastName,contact,address,Session.get("UserProfileId"), (err, res)=> {
                 if (err) {
                     this.setState({
@@ -77,67 +85,66 @@ export default class MyProfile extends React.Component{
 
     render(){
         return(
-        <Form horizontal className = "customForm" onSubmit={this.handleSubmit.bind(this)}>
-            <FormGroup controlId="formHorizontalEmail">
-                <Col componentClass={ControlLabel} sm={2}>
-                    Email
-                </Col>
-                <Col sm={10} lg={4}>
-                    <FormControl type="email" placeholder="Email" ></FormControl>
-                </Col>
-            </FormGroup>
+            <Form horizontal className = "customForm" onSubmit={this.handleSubmit.bind(this)}>
+                <FormGroup controlId="formHorizontalEmail">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        Email
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="email" placeholder="Email" defaultValue = {this.state.email} readOnly="readOnly" ></FormControl>
+                    </Col>
+                </FormGroup>
 
-            <FormGroup controlId="formHorizontalFirstName">
-                <Col componentClass={ControlLabel} sm={2}>
-                    First Name
-                </Col>
-                <Col sm={10} lg={4}>
-                    <FormControl type="text" ref="firstName" placeholder="FirstName" defaultValue = {this.state.fName} required/>
-                </Col>
-            </FormGroup>
+                <FormGroup controlId="formHorizontalFirstName">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        First Name
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="text" ref="firstName" placeholder="FirstName" defaultValue = {this.state.fName} required/>
+                    </Col>
+                </FormGroup>
 
-            <FormGroup controlId="formHorizontalLastName">
-                <Col componentClass={ControlLabel} sm={2}>
-                    Last Name
-                </Col>
-                <Col sm={10} lg={4}>
-                    <FormControl type="text" placeholder="LastName" ref="lastName" defaultValue = {this.state.lName}
-                                  required/>
-                </Col>
-            </FormGroup>
+                <FormGroup controlId="formHorizontalLastName">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        Last Name
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="text" placeholder="LastName" ref="lastName" defaultValue = {this.state.lName}
+                                     required/>
+                    </Col>
+                </FormGroup>
 
-            <FormGroup controlId="formHorizontalContact">
-                <Col componentClass={ControlLabel} sm={2}>
-                    Contact
-                </Col>
-                <Col sm={10} lg={4}>
-                    <FormControl type="number" placeholder="Contact" ref="contact" defaultValue = {this.state.phone}
-                                  required/>
-                    <FormControl.Feedback />
-                </Col>
-            </FormGroup>
+                <FormGroup controlId="formHorizontalContact">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        Contact
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="text" placeholder="Contact" ref="contact" defaultValue = {this.state.phone}
+                                     required/>
+                        <FormControl.Feedback />
+                    </Col>
+                </FormGroup>
 
-            <FormGroup controlId="formHorizontalAddress">
-                <Col componentClass={ControlLabel} sm={2}>
-                    Address
-                </Col>
-                <Col sm={10} lg={4}>
-                    <FormControl componentClass="textarea" placeholder="Address" ref="address" defaultValue = {this.state.add} required/>
-                </Col>
-            </FormGroup>
+                <FormGroup controlId="formHorizontalAddress">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        Address
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl componentClass="textarea" placeholder="Address" ref="address" defaultValue = {this.state.add} required/>
+                    </Col>
+                </FormGroup>
 
-            <FormGroup>
-                <Col smOffset={2} sm={10}>
-                    <Button type="submit"  bsStyle="danger">Save</Button>
-                </Col>
-            </FormGroup>
-            <FormGroup>
-                <Col smOffset={2} sm={10}>
-                    {this.state.message?<Alert bsStyle={this.state.bstyle} id="alertBox">{this.state.message}</Alert>:undefined}
-                </Col>
-            </FormGroup>
-        </Form>
-
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        <Button type="submit"  bsStyle="danger">Save</Button>
+                    </Col>
+                </FormGroup>
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        {this.state.message?<Alert bsStyle={this.state.bstyle} id="alertBox">{this.state.message}</Alert>:undefined}
+                    </Col>
+                </FormGroup>
+            </Form>
         );
     }
 }
