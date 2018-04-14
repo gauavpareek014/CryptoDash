@@ -46,7 +46,7 @@
               stroke: indianred;
             }
 
-            .summary.Close {
+            .summary.BTC {
               color: steelblue;
             }
 
@@ -58,7 +58,7 @@
               stroke: indianred;
             }
 
-            .summary.Volume {
+            .summary.ETH {
               color: indianred;
             }
 
@@ -402,7 +402,7 @@
             var tipHtml = '<div style="color: orange;">' + formatDate(d.Date) + '</div>';
             pathes.forEach(function(path) {
                 if (path.visible) {
-                    tipHtml += '<div class="summary ' + path.name +'">' + path.name + ": $" + numberWithCommas(d[path.y]) + '</div>';
+                    tipHtml += '<div class="summary ' + path.y +'">' + path.name + ": $" + d[path.y].toLocaleString(undefined, { minimumFractionDigits: 2}) + '</div>';
                 }
             });
 

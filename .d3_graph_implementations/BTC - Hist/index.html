@@ -140,7 +140,7 @@
             mini_height = 500 - mini_margin.top - mini_margin.bottom;   
 
         //Date formatter variable
-        var formatDate = d3.time.format("%-d-%b-%y"),
+        var formatDate = d3.time.format("%m/%d/%y"),
             parseDate = formatDate.parse,
             bisectDate = d3.bisector(function(d) { return d.Date; }).left;
 
@@ -507,12 +507,12 @@
                 }
             }
             popup.style("left", left + "px")			 
-            .style("top", "80px");
+            .style("top", "80px"); 
 
             var tipHtml = '<div style="color: orange;">' + formatDate(d.Date) + '</div>';
             pathes.forEach(function(path) {
                 if (path.visible) {
-                    tipHtml += '<div class="summary ' + path.name +'">' + path.name + ": " + d[path.y] + '</div>';
+                    tipHtml += '<div class="summary ' + path.name +'">' + path.name + ": $" + d[path.y].toLocaleString(undefined, { minimumFractionDigits: 2}) + '</div>';
                 }
             });
 
