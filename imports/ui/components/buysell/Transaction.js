@@ -7,10 +7,10 @@ export default class Transaction extends Component{
         return(
             <li>
             <span >
-          <strong> {this.props.transaction.cryptoAmount}</strong>
+          <strong> {this.props.transaction.cryptototal}</strong>
 
         </span>
-                <span> {this.props.transaction.cryptocurrency} ------- $ {this.props.transaction.bankAmount}</span>
+                <span> {this.props.transaction.cryptocurrency}  ------- $ {this.props.transaction.bankAmount}</span>
             </li>
 
         );

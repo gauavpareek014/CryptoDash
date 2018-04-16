@@ -13,7 +13,7 @@ export default class BuySellTab extends React.Component{
                     <Tab eventKey={1} title="Buy">
                              <BuySellPayment/>
                     </Tab>
-                    <Tab eventKey={2} title="Sell">
+                    <Tab eventKey={2} title="Sell"> 
                              <BuySellPayment/>
                     </Tab>
                 </Tabs>

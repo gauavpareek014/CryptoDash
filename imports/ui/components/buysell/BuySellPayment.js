@@ -13,15 +13,27 @@ export default class BuySellPayment extends React.Component{
         super(props);
 
         this.state = {
-            cryptos :''
+            cryptos :'0.00',
+            currency:' ',
+            buy:'BUY'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-        //var cryptos = '';
+    bitcoin(){
+     this.setState({currency:"BTC"});
+
+        axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
+            .then(res => {
+                const cryptos = res.data;
+                console.log(cryptos);
+                this.setState({cryptos:cryptos});
+            })
+
+    }
+    etherium(){
+      this.setState({currency:"ETH"});
+
         axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD')
             .then(res => {
                 const cryptos = res.data;
@@ -29,20 +41,37 @@ export default class BuySellPayment extends React.Component{
                 this.setState({cryptos:cryptos});
             })
 
+    }
+    buy(){
+        this.setState({buy:"BUY"});
+    }
+    sell(){
+        this.setState({buy:"SELL"});
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
+        //var cryptos = '';
+        
+       
 
         console.log(this.state.cryptos);
         var transaction = 'BUY';
-        var cryptocurrency  = 'ETH';
+        var cryptocurrency  = this.state.currency;
         var cryptoAmount = this.state.cryptos.USD;
-        var bankAmount = text;
+        var cryptototal = number/cryptoAmount;
+        var bankAmount = number;
         var date = new Date();
 
 
-        Meteor.call('transactions.insert', transaction, cryptocurrency, cryptoAmount, bankAmount, date );
+
+        Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
 
         // Clear form
-        console.log(text);
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
+        console.log(number);
+        console.log(cryptototal);
+        ReactDOM.findDOMNode(this.refs.numberInput).value = '';
 
     }
 
@@ -54,25 +83,27 @@ export default class BuySellPayment extends React.Component{
                 <Grid>
                     <Row>
                         <Col xs={4} md={4}>
-                            <Thumbnail src="/images/Bitcoin-icon.png" alt="20x20">
-
+                            <Thumbnail src="/images/Bitcoin-icon.png" alt="20x20" id="btc" onClick={this.bitcoin.bind(this)}>
                             </Thumbnail>
                             <input
-                                type="text"
-                                ref="textInput"
-                                placeholder="Type to add new tasks"
+                                type="number"
+                                ref="numberInput"
+                                placeholder="0.00 USD"
                             />
-                            <button onClick={this.handleSubmit}>-BUY-</button>
+                            <input
+                            readOnly
+                            value={this.state.cryptos.USD+" "+this.state.currency}
+                            />
+                            
+                            
+                            <button onClick={this.handleSubmit}>{this.state.buy}</button>
 
                         </Col>
                         <Col xs={4} md={4}>
-                            <Thumbnail src="/images/etherium-icon.png" alt="20x20">
+                            <Thumbnail src="/images/etherium-icon.png" alt="20x20" onClick={this.etherium.bind(this)}>
                             </Thumbnail>
                         </Col>
-                        <Col xs={4} md={4}>
-                            <Thumbnail src="/images/litecoin-icon.png" alt="20x20">
-                            </Thumbnail>
-                        </Col>
+                      
                     </Row>
                 </Grid>
 

@@ -18,10 +18,11 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   
-    'transactions.insert'(transaction, cryptocurrency , cryptoAmount , bankAmount , date){
+    'transactions.insert'(transaction, cryptototal, cryptocurrency , cryptoAmount , bankAmount , date){
         TransactionsData.insert({
         userId : this.userId,
         transaction :transaction,
+        cryptototal :cryptototal,
         cryptocurrency :cryptocurrency,
         cryptoAmount: cryptoAmount,
         bankAmount :bankAmount,
