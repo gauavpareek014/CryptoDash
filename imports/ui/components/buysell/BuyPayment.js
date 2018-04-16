@@ -1,20 +1,20 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 
-import { Button,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label} from 'react-bootstrap';
+import { Button,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form, FormGroup,Alert, ControlLabel, FormControl} from 'react-bootstrap';
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
 
 
 
-export default class BuySellPayment extends React.Component{
+export default class BuyPayment extends React.Component{
 
     constructor(props) {
         super(props);
 
         this.state = {
             cryptos :'0.00',
-            currency:' ',
+            currency:'',
             buy:'BUY'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +29,9 @@ export default class BuySellPayment extends React.Component{
                 console.log(cryptos);
                 this.setState({cryptos:cryptos});
             })
+            document.getElementById("btc").setAttribute("class", "");
+            document.getElementById("eth").setAttribute("class", "thumbnail");
+
 
     }
     etherium(){
@@ -40,6 +43,8 @@ export default class BuySellPayment extends React.Component{
                 console.log(cryptos);
                 this.setState({cryptos:cryptos});
             })
+            document.getElementById("eth").setAttribute("class", "");
+            document.getElementById("btc").setAttribute("class", "thumbnail");
 
     }
     buy(){
@@ -53,8 +58,6 @@ export default class BuySellPayment extends React.Component{
         event.preventDefault();
         const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
         //var cryptos = '';
-        
-       
 
         console.log(this.state.cryptos);
         var transaction = 'BUY';
@@ -65,9 +68,9 @@ export default class BuySellPayment extends React.Component{
         var date = new Date();
 
 
-
+        if(bankAmount != 0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
-
+        }
         // Clear form
         console.log(number);
         console.log(cryptototal);
@@ -85,26 +88,48 @@ export default class BuySellPayment extends React.Component{
                         <Col xs={4} md={4}>
                             <Thumbnail src="/images/Bitcoin-icon.png" alt="20x20" id="btc" onClick={this.bitcoin.bind(this)}>
                             </Thumbnail>
-                            <input
-                                type="number"
-                                ref="numberInput"
-                                placeholder="0.00 USD"
-                            />
-                            <input
-                            readOnly
-                            value={this.state.cryptos.USD+" "+this.state.currency}
-                            />
-                            
-                            
-                            <button onClick={this.handleSubmit}>{this.state.buy}</button>
 
                         </Col>
                         <Col xs={4} md={4}>
-                            <Thumbnail src="/images/etherium-icon.png" alt="20x20" onClick={this.etherium.bind(this)}>
+                            <Thumbnail src="/images/etherium-icon.png" alt="20x20" id="eth" onClick={this.etherium.bind(this)}>
                             </Thumbnail>
                         </Col>
                       
                     </Row>
+                    <Row>
+                    <Col xs={20} md={20}>
+                    <Form horizontal className = "customForm" onSubmit={this.handleSubmit.bind(this)}>
+                    <FormGroup controlId="formHorizontalCrypto">
+                    <Col componentClass={ControlLabel} sm={2}>
+                    {this.state.currency}:
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="text" placeholder={this.state.cryptos.USD} defaultValue = {this.state.cryptos.USD} readOnly="readOnly" ></FormControl>
+                    </Col>
+                </FormGroup>
+
+                <FormGroup controlId="formHorizontalInput">
+                    <Col componentClass={ControlLabel} sm={2}>
+                        USD:
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="number" ref="numberInput" placeholder="0.00 USD" required/>
+                    </Col>
+                </FormGroup> 
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        <Button type="submit"  bsStyle="danger">{this.state.buy}</Button>
+                    </Col>
+                </FormGroup>
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        {this.state.message?<Alert bsStyle={this.state.bstyle} id="alertBox">{this.state.message}</Alert>:undefined}
+                    </Col>
+                </FormGroup>
+            </Form>
+
+                            </Col>
+                            </Row>
                 </Grid>
 
             </div>

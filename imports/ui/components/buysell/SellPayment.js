@@ -1,0 +1,138 @@
+import React from "react";
+import ReactDOM from 'react-dom';
+
+import { Button,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form, FormGroup,Alert, ControlLabel, FormControl} from 'react-bootstrap';
+import {Meteor} from "meteor/meteor";
+import axios from 'axios';
+
+<style>
+</style>
+
+
+export default class SellPayment extends React.Component{
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            cryptos :'0.00',
+            currency:'',
+            buy:'SELL',
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    bitcoin(){
+     this.setState({currency:"BTC"});
+
+        axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
+            .then(res => {
+                const cryptos = res.data;
+                console.log(cryptos);
+                this.setState({cryptos:cryptos});
+            })
+            document.getElementById("btc2").setAttribute("class", "");
+            document.getElementById("eth2").setAttribute("class", "thumbnail");
+
+    
+    }
+    etherium(){
+      this.setState({currency:"ETH"});
+
+        axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD')
+            .then(res => {
+                const cryptos = res.data;
+                console.log(cryptos);
+                this.setState({cryptos:cryptos});
+            })
+            document.getElementById("eth2").setAttribute("class", "");
+            document.getElementById("btc2").setAttribute("class", "thumbnail");
+
+
+    }
+    
+    handleSubmit(event) {
+        event.preventDefault();
+        const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
+        //var cryptos = '';
+        
+       
+
+        console.log(this.state.cryptos);
+        var transaction = 'SELL';
+        var cryptocurrency  = this.state.currency;
+        var cryptoAmount = this.state.cryptos.USD;
+        var cryptototal = number;
+        var bankAmount = number*cryptoAmount;
+        var date = new Date();
+
+
+        if(bankAmount != 0 && cryptocurrency != ''){
+        Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
+         }
+        // Clear form
+        console.log(number);
+        console.log(cryptototal);
+        ReactDOM.findDOMNode(this.refs.numberInput).value = '';
+
+    }
+
+
+
+
+    render(){
+        return (
+            <div className="buySellPayment">
+                <Grid>
+                    <Row>
+                        <Col xs={4} md={4}>
+                            <Thumbnail src="/images/Bitcoin-icon.png" alt="20x20" id="btc2" onClick={this.bitcoin.bind(this)}>
+                            </Thumbnail>
+
+                        </Col>
+                        <Col xs={4} md={4}>
+                            <Thumbnail src="/images/etherium-icon.png" alt="20x20" id="eth2" onClick={this.etherium.bind(this)}>
+                            </Thumbnail>
+                        </Col>
+                    </Row>
+                    <Row>
+                    <Col xs={20} md={20}>
+                    <Form horizontal className = "customForm" onSubmit={this.handleSubmit.bind(this)}>
+                    <FormGroup controlId="formHorizontalCrypto">
+                    <Col componentClass={ControlLabel} sm={2}>
+                    {this.state.currency}:
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="text" placeholder={this.state.cryptos.USD} defaultValue = {this.state.cryptos.USD} readOnly="readOnly" ></FormControl>
+                    </Col>
+                </FormGroup>
+
+                <FormGroup controlId="formHorizontalInput">
+                    <Col componentClass={ControlLabel} sm={2}>
+                    {this.state.currency}:
+                    </Col>
+                    <Col sm={10} lg={4}>
+                        <FormControl type="number" ref="numberInput" placeholder={"0.00 "+ this.state.currency} required/>
+                    </Col>
+                </FormGroup> 
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        <Button type="submit"  bsStyle="danger">{this.state.buy}</Button>
+                    </Col>
+                </FormGroup>
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                        {this.state.message?<Alert bsStyle={this.state.bstyle} id="alertBox">{this.state.message}</Alert>:undefined}
+                    </Col>
+                </FormGroup>
+            </Form>
+
+                            </Col>
+                            </Row>
+                </Grid>
+
+
+            </div>
+        );
+    }
+}
