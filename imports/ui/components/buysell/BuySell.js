@@ -6,7 +6,7 @@ import BuyPayment from "./BuyPayment";
 import SellPayment from "./SellPayment";
 import Transaction from "./Transaction";
 import { withTracker } from 'meteor/react-meteor-data';
-import { TransactionsData } from '../../../api/tasks';
+import { TransactionsData } from '../../../api/transaction';
 
 class BuySell extends React.Component{
 
