@@ -8,6 +8,7 @@ import FaHome from 'react-icons/lib/fa/home'
 import FaArrowH from 'react-icons/lib/fa/arrows-h'
 import FaAccount from 'react-icons/lib/md/account-balance-wallet'
 import FaSettings from 'react-icons/lib/md/settings-applications'
+import AccountSetup from "../setup/AccountSetup";
 
 export default class TabUI extends React.Component{
     render(){
@@ -25,6 +26,9 @@ export default class TabUI extends React.Component{
                 </Tab>
                 <Tab eventKey={4} title="Settings" >
                     <Settings/>
+                </Tab>
+                <Tab eventKey={5} title="Setup" >
+                    <AccountSetup/>
                 </Tab>
             </Tabs>
            </div>

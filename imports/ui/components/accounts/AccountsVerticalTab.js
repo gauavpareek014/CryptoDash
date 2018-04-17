@@ -5,6 +5,38 @@ import ETCTransactions from "./ETCTransactions";
 
 
 export default class AccountsVerticalTab extends React.Component{
+
+    constructor(props){
+        super(props);
+        /*let btctransaction =[{
+        _id:'1234',
+        month:'Apr',
+        day:12,
+        year:2018,
+        type:'buy',
+        amount:0.00046862,
+        usd:'$10'
+        },{
+            _id:'12345',
+            month:'Apr',
+            day:13,
+            year:2018,
+            type:'sell',
+            amount:0.0004534862,
+            usd:'$10'
+        },{
+            _id:'12346',
+            month:'Apr',
+            day:14,
+            year:2018,
+            type:'buy',
+            amount:0.005466862,
+            usd:'$10'
+        }
+        ];*/
+    }
+
+
     render(){
         return (
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
