@@ -70,6 +70,6 @@ export default withTracker(() => {
     Meteor.subscribe('transactions');
 
     return {
-        transactions: TransactionsData.find({}).fetch(),
+        transactions: TransactionsData.find({},{ sort: { createdAt: -1 } }).fetch(),
     };
 })(BuySell);
