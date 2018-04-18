@@ -48,7 +48,7 @@ export default class AccountSetup extends React.Component{
                                                      Wallet Number
                                                 </Col>
                                                 <Col sm={10} lg={4}>
-                                                    <FormControl type="number" placeholder="545564345" ref="vwalletno" readOnly="readOnly" required/>
+                                                    <FormControl type="number" placeholder="For Eg:545564345" ref="vwalletno" readOnly="readOnly" required/>
                                                 </Col>
                                             </FormGroup>
 
