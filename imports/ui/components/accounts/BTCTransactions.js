@@ -1,7 +1,12 @@
 import React from "react";
+import {Meteor} from "meteor/meteor";
 import { ListGroup,ListGroupItem,Panel,Label,button,Row,Grid,Col } from 'react-bootstrap';
+import {TransactionsData} from "../../../api/transaction";
+import { withTracker } from 'meteor/react-meteor-data';
+import Transaction from "./Transaction";
 
-export default class BTCTransactions extends React.Component{
+
+class BTCTransactions extends React.Component{
 
     constructor(props){
         super(props);
@@ -9,6 +14,18 @@ export default class BTCTransactions extends React.Component{
             bstyle:'danger',
         };
 
+    }
+
+    renderTask(){
+        let transactions = this.props.transactions;
+
+        return transactions.map((transaction) => {
+            return(
+                <Transaction key={transaction._id}
+                             transaction ={transaction}
+                />
+            );
+        })
     }
 
     render(){
@@ -21,6 +38,8 @@ export default class BTCTransactions extends React.Component{
                 <Panel.Body>
 
                     <ListGroup>
+                        {this.renderTask()}
+                        {/*
                         <ListGroupItem href="#link1" bsStyle="success">
                             <Grid>
                                 <Row className="show-grid">
@@ -37,7 +56,7 @@ export default class BTCTransactions extends React.Component{
                                         </Col>
                                 </Row>
                             </Grid>
-                        </ListGroupItem>
+                        </ListGroupItem>*/}
                     </ListGroup>
                 </Panel.Body>
             </Panel>
@@ -45,4 +64,11 @@ export default class BTCTransactions extends React.Component{
         );
     }
 }
+export default withTracker(() => {
+    Meteor.subscribe('transactions');
+
+    return {
+        transactions: TransactionsData.find({},{ sort: { createdAt: -1 } }).fetch(),
+    };
+})(BTCTransactions);
 
