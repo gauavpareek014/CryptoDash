@@ -66,4 +66,34 @@ h1{
   background-color:#EB6864 ;
 }
 
+.button {
+  border: 1px solid #555555;
+  color: #555555;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1;
+  outline: none;
+  transition: background .2s ease, transform .2s ease;
+
+}
+
+.button--rect-color {
+  background: transparent;
+  height: 5rem;
+  width: 5rem;
+}
+
+.button--rect {
+  height: 5rem;
+  width: 5rem;
+}
+
+.button--rect-currency {
+  border: 1px #ffffff;
+  color: #ffffff;
+  background: #e35557;
+  height: 5rem;
+  width: 30rem;
+  align-content: right;
+}
 
