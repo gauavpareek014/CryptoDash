@@ -144,7 +144,6 @@ export default class BuyPayment extends React.Component {
                                     </Col>
                                 </FormGroup>
                             </Form>
-
                         </Col>
                     </Row>
                 </Grid>

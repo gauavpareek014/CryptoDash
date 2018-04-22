@@ -27,7 +27,7 @@ export default class Transaction extends Component{
 
     render(){
         return(
-            <ListGroupItem href="#link1" bsStyle="success">
+            <ListGroupItem href="#link1" bsStyle={this.props.transaction.transaction == 'BUY'?'success':'danger'}>
 
                 <Grid>
                     <Row className="show-grid">
