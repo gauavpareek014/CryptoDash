@@ -16,7 +16,7 @@ export default class TitleBar extends React.Component{
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">Crypo Currency Exchange</a>
+                        <a href="#">Crypto Currency Exchange</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

@@ -53,7 +53,7 @@ export default class Home extends React.Component{
                                            <Col sm={6} md={4}>
                                                <Panel bsStyle="default">
                                                    <Panel.Heading>
-                                                       <Panel.Title componentClass="h3">Etherium Brushing Graph</Panel.Title>
+                                                       <Panel.Title componentClass="h3">Ethereum Brushing Graph</Panel.Title>
                                                    </Panel.Heading>
                                                    <Panel.Body>
 
