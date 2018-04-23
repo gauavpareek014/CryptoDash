@@ -1,7 +1,9 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {Grid, Row, Col, Jumbotron,Form, FormGroup,Alert, ControlLabel, FormControl,Panel,Button} from 'react-bootstrap';
 import {UserProfile} from "../../../api/UserProfile";
+import {Userwallet} from "../../../api/transaction";
 
 export default class AccountSetup extends React.Component{
 
@@ -15,8 +17,26 @@ export default class AccountSetup extends React.Component{
         this.state = {
             email:emailAddress,
         };
+    };
+    handleSubmit(event) {
+        event.preventDefault();
+        const amount = ReactDOM.findDOMNode(this.refs.walletamount).value.trim();        
+        const number = ReactDOM.findDOMNode(this.refs.walletno).value.trim();
+        console.log(amount);
+        console.log(number);
+        var email = this.state.email;
+        var walletno  = number;
+        var walletamount = amount;
+        console.log(email);
+        console.log(walletno);
+        console.log(walletamount);
 
+        Meteor.call('wallet.insert', walletamount, email, walletno);
+        
     }
+
+
+    
     render(){
         return (
             <Jumbotron>
@@ -28,7 +48,7 @@ export default class AccountSetup extends React.Component{
                                         <Panel.Title componentClass="h3">User Account Setup Details</Panel.Title>
                                     </Panel.Heading>
                                     <Panel.Body>
-                                        <Form horizontal className = "useraccountsetup">
+                                        <Form horizontal className = "useraccountsetup" onSubmit={this.handleSubmit.bind(this)}>
                                             <FormGroup>
                                                 <Col smOffset={2} sm={10}>
                                                     <Button type="submit"  bsStyle="primary">Setup My Account</Button>
@@ -48,7 +68,7 @@ export default class AccountSetup extends React.Component{
                                                      Wallet Number
                                                 </Col>
                                                 <Col sm={10} lg={4}>
-                                                    <FormControl type="number" placeholder="545564345" ref="vwalletno" readOnly="readOnly" required/>
+                                                    <FormControl type="number" placeholder="545564345" ref="walletno" readOnly="readOnly" defaultValue = "545564345" required/>
                                                 </Col>
                                             </FormGroup>
 
@@ -57,7 +77,7 @@ export default class AccountSetup extends React.Component{
                                                      Wallet Amount
                                                 </Col>
                                                 <Col sm={10} lg={4}>
-                                                    <FormControl type="number" placeholder="$1000" ref="vwalletamount" readOnly="readOnly" required/>
+                                                    <FormControl type="number" placeholder="$1000" ref="walletamount" defaultValue = "1000"  readOnly="readOnly" required/>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup>

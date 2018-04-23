@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-
 import { Button,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form, FormGroup,Alert, ControlLabel, FormControl} from 'react-bootstrap';
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
@@ -15,7 +14,10 @@ export default class BuyPayment extends React.Component{
         this.state = {
             cryptos :'0.00',
             currency:'',
-            buy:'BUY'
+            buy:'BUY',
+            btc:this.props.btc,
+            eth:this.props.eth,
+
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -66,14 +68,30 @@ export default class BuyPayment extends React.Component{
         var cryptototal = number/cryptoAmount;
         var bankAmount = number;
         var date = new Date();
+        var eth=0;
+        var btc=0;
+        var usd=-number;
+        if(this.state.currency == "BTC"){
+        btc=cryptototal;
+        
+        }
+        if(this.state.currency == "ETH"){
+        eth=cryptototal;
+        }
+    
 
 
-        if(bankAmount != 0 && cryptocurrency != ''){
+        if(usd >= 0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
+        Meteor.call('wallet.update',usd,btc,eth);
         }
         // Clear form
         console.log(number);
         console.log(cryptototal);
+        console.log(date);
+        console.log(usd);
+        console.log(btc);
+        console.log(eth);
         ReactDOM.findDOMNode(this.refs.numberInput).value = '';
 
     }

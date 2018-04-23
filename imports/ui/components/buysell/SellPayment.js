@@ -65,14 +65,29 @@ export default class SellPayment extends React.Component{
         var cryptototal = number;
         var bankAmount = number*cryptoAmount;
         var date = new Date();
+        var btc = 10;
+        var eth = 10;
+        var usd = 10;
+        if(this.state.currency == "BTC"){
+            btc=10-cryptototal;
+            usd= usd+bankAmount;
+            
+            }
+            if(this.state.currency == "ETH"){
+            eth=10-cryptototal;
+            usd= usd+bankAmount;
+            }
 
 
-        if(bankAmount != 0 && cryptocurrency != ''){
+        if(btc >= 0 && eth >=0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
-         }
+        Meteor.call('wallet.update',usd,btc,eth);
+
+        }
         // Clear form
         console.log(number);
         console.log(cryptototal);
+        console.log(usd);
         ReactDOM.findDOMNode(this.refs.numberInput).value = '';
 
     }

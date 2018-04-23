@@ -6,7 +6,7 @@ import BuyPayment from "./BuyPayment";
 import SellPayment from "./SellPayment";
 import Transaction from "./Transaction";
 import { withTracker } from 'meteor/react-meteor-data';
-import { TransactionsData } from '../../../api/transaction';
+import { TransactionsData, Userwallet } from '../../../api/transaction';
 
 class BuySell extends React.Component{
 
@@ -23,13 +23,15 @@ class BuySell extends React.Component{
 
     renderTasks() {
         let transactions = this.props.transactions;
+        let wallet = this.props.wallet;
 
-        return transactions.map((transaction) => {
+        return transactions.map((transaction,wallet) => {
 
             return (
                 <Transaction
                     key={transaction._id}
                     transaction={transaction}
+                    wallet={wallet}
                 />
             );
         });
@@ -68,8 +70,9 @@ class BuySell extends React.Component{
 }
 export default withTracker(() => {
     Meteor.subscribe('transactions');
-
+    Meteor.subscribe('wallet');
     return {
+        wallet: Userwallet.find({},{userId:this.userId}).fetch(),
         transactions: TransactionsData.find({},{ sort: { createdAt: -1 } }).fetch(),
     };
 })(BuySell);
