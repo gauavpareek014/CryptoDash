@@ -5,7 +5,7 @@ export default class CarouselBar extends React.Component{
 
     render(){
         return (
-            <Carousel slide={true} controls= {false} interval = {2000}>
+            <Carousel slide={true} controls= {false} pauseOnHover= {false} interval = {1500}>
                 <Carousel.Item animateIn={true} animateOut={true}>
                     <img width={900} height={250} className="img-responsive center-block" src="/images/rsz_bitcoin.jpg" />
                     <Carousel.Caption>

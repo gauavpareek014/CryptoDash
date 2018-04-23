@@ -1,4 +1,5 @@
 import React from "react";
+import RecentActivity  from "./RecentActivity";
 import { Link } from "react-router"
 import { Button,Jumbotron,Grid,Row,Col,Panel } from 'react-bootstrap';
 
@@ -53,7 +54,7 @@ export default class Home extends React.Component{
                                            <Col sm={6} md={4}>
                                                <Panel bsStyle="default">
                                                    <Panel.Heading>
-                                                       <Panel.Title componentClass="h3">Etherium Brushing Graph</Panel.Title>
+                                                       <Panel.Title componentClass="h3">Ethereum Brushing Graph</Panel.Title>
                                                    </Panel.Heading>
                                                    <Panel.Body>
 
@@ -77,7 +78,7 @@ export default class Home extends React.Component{
                                    </Grid>
                                </Col>
 
-                               <Col xs={6} md={4}>
+                               <Col xs={12} md={4}>
                                    <Panel bsStyle="default">
                                        <Panel.Heading>
                                            <Panel.Title componentClass="h3">Portfolio Performance</Panel.Title>
@@ -90,11 +91,10 @@ export default class Home extends React.Component{
 
                                    <Panel bsStyle="default">
                                        <Panel.Heading>
-                                           <Panel.Title componentClass="h3">Rececnt Transaction History</Panel.Title>
+                                           <Panel.Title componentClass="h3">Rececnt Activity</Panel.Title>
                                        </Panel.Heading>
                                        <Panel.Body>
-
-
+                                       <RecentActivity/>
                                        </Panel.Body>
                                    </Panel>
                                </Col>
