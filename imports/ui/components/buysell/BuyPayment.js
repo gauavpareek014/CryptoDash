@@ -1,8 +1,5 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import { Button,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form, FormGroup,Alert, ControlLabel, FormControl} from 'react-bootstrap';
-=======
 
 import {
     Button,
@@ -20,7 +17,6 @@ import {
     ControlLabel,
     FormControl
 } from 'react-bootstrap';
->>>>>>> c90daf9c67c57af4de562e95bbf1c1adcc6a4ece
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
 
@@ -31,18 +27,12 @@ export default class BuyPayment extends React.Component {
         super(props);
 
         this.state = {
-<<<<<<< HEAD
             cryptos :'0.00',
             currency:'',
             buy:'BUY',
             btc:this.props.btc,
             eth:this.props.eth,
 
-=======
-            cryptos: '0.00',
-            currency: '',
-            buy: 'BUY'
->>>>>>> c90daf9c67c57af4de562e95bbf1c1adcc6a4ece
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -109,14 +99,9 @@ export default class BuyPayment extends React.Component {
     
 
 
-<<<<<<< HEAD
         if(usd >= 0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
         Meteor.call('wallet.update',usd,btc,eth);
-=======
-        if (bankAmount != 0 && cryptocurrency != '') {
-            Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date);
->>>>>>> c90daf9c67c57af4de562e95bbf1c1adcc6a4ece
         }
         // Clear form
         console.log(number);

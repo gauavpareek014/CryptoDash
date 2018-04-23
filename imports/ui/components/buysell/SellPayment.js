@@ -80,7 +80,6 @@ export default class SellPayment extends React.Component {
         var cryptototal = number;
         var bankAmount = number * cryptoAmount;
         var date = new Date();
-<<<<<<< HEAD
         var btc = 10;
         var eth = 10;
         var usd = 10;
@@ -99,12 +98,6 @@ export default class SellPayment extends React.Component {
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
         Meteor.call('wallet.update',usd,btc,eth);
 
-=======
-
-
-        if (bankAmount != 0 && cryptocurrency != '') {
-            Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date);
->>>>>>> c90daf9c67c57af4de562e95bbf1c1adcc6a4ece
         }
         // Clear form
         console.log(number);
