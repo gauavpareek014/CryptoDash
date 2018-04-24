@@ -68,7 +68,7 @@ export default withTracker(() => {
     Meteor.subscribe('transactions');
 
     return {
-        transactions: TransactionsData.find({},{ sort: { createdAt: -1 } }).fetch(),
+        transactions: TransactionsData.find({},{ sort: { date: -1 } }).fetch(),
     };
 })(BTCTransactions);
 
