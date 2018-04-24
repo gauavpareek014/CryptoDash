@@ -45,22 +45,23 @@ class BuySell extends React.Component{
             <Jumbotron>
                 <Grid>
                     <Row className="show-grid">
-                        <Col sm={6} md={6} lg={6}>
+                        <Col sm={12} md={12} lg={12}>
                             <BuySellTab/>
                         </Col>
 
-                        <Col sm={6} md={6} lg={6}>
+                       {/* <Col sm={6} md={6} lg={6}>
                             <Panel bsStyle="default">
                                 <Panel.Heading>
                                     <Panel.Title componentClass="h3">Transaction Details</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body>
+                                    <TransactionDetails/>
                                     <ul>
                                         {this.renderTasks()}
                                     </ul>
                                 </Panel.Body>
                             </Panel>
-                        </Col>
+                        </Col>*/}
                     </Row>
                 </Grid>
             </Jumbotron>

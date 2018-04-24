@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import {Button,Image,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form,FormGroup,Alert,ControlLabel,FormControl} from 'react-bootstrap';
+import FaAccount from 'react-icons/lib/md/account-balance-wallet'
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -19,7 +20,7 @@ class BuyPayment extends React.Component {
             buy:'BUY',
             btc: 1,
             eth:this.props.eth,
-
+            amount:'0.00'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -104,57 +105,89 @@ class BuyPayment extends React.Component {
 
     }
 
+    changeAmount(){
+        const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
+        this.setState({
+            amount:number!=""?number:"0.00"
+        });
+    }
 
     render() {
         return (
             <div className="buySellPayment">
                 <Grid>
                     <Row>
-                        <Col xs={4} md={2}>
-                            <Image src="/images/Bitcoin-icon.png" alt="20x20" id="btc" width="50px" height="50px"
-                                   onClick={this.bitcoin.bind(this)} responsive/>
-                        </Col>
-                        <Col xs={4} md={2}>
-                            <Image src="/images/etherium-icon.png" alt="20x20" id="eth" width="50px" height="50px"
-                                   onClick={this.etherium.bind(this)} responsive/>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs={20} md={20}>
-                            <Form horizontal className="customForm" onSubmit={this.handleSubmit.bind(this)}>
-                                <FormGroup controlId="formHorizontalCrypto">
-                                    <Col componentClass={ControlLabel} sm={2}>
-                                        {this.state.currency}:
-                                    </Col>
-                                    <Col sm={10} lg={4}>
-                                        <FormControl type="text" placeholder={this.state.cryptos.USD}
-                                                     defaultValue={this.state.cryptos.USD}
-                                                     readOnly="readOnly"></FormControl>
-                                    </Col>
-                                </FormGroup>
+                        <Col xs={12} md={6}>
+                            <Row>
+                                <Col xs={4} md={2}>
+                                    <Image src="/images/Bitcoin-icon.png" alt="20x20" id="btc" width="50px"
+                                           height="50px"
+                                           onClick={this.bitcoin.bind(this)} responsive/>
+                                </Col>
+                                <Col xs={4} md={2}>
+                                    <Image src="/images/etherium-icon.png" alt="20x20" id="eth" width="50px"
+                                           height="50px"
+                                           onClick={this.etherium.bind(this)} responsive/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={20} md={20}>
+                                    <Form horizontal className="customForm" onSubmit={this.handleSubmit.bind(this)}>
+                                        <FormGroup controlId="formHorizontalCrypto">
+                                            <Col componentClass={ControlLabel} sm={2}>
+                                                {this.state.currency}:
+                                            </Col>
+                                            <Col sm={10} lg={4}>
+                                                <FormControl type="text" placeholder={this.state.cryptos.USD}
+                                                             defaultValue={this.state.cryptos.USD}
+                                                             readOnly="readOnly"></FormControl>
+                                            </Col>
+                                        </FormGroup>
 
-                                <FormGroup controlId="formHorizontalInput">
-                                    <Col componentClass={ControlLabel} sm={2}>
-                                        USD:
-                                    </Col>
-                                    <Col sm={10} lg={4}>
-                                        <FormControl type="number" ref="numberInput" placeholder="0.00 USD" required/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Col smOffset={2} sm={10}>
-                                        <Button type="submit" bsStyle="danger">{this.state.buy}</Button>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Col smOffset={2} sm={10}>
-                                        {this.state.message ? <Alert bsStyle={this.state.bstyle}
-                                                                     id="alertBox">{this.state.message}</Alert> : undefined}
-                                    </Col>
-                                </FormGroup>
-                            </Form>
+                                        <FormGroup controlId="formHorizontalInput">
+                                            <Col componentClass={ControlLabel} sm={2}>
+                                                USD:
+                                            </Col>
+                                            <Col sm={10} lg={4}>
+                                                <FormControl type="number" ref="numberInput" placeholder="0.00 USD"  onKeyUp={this.changeAmount.bind(this)}
+                                                             required/>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Col smOffset={2} sm={10}>
+                                                <Button type="submit" bsStyle="danger">{this.state.buy}</Button>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Col smOffset={2} sm={10}>
+                                                {this.state.message ? <Alert bsStyle={this.state.bstyle}
+                                                                             id="alertBox">{this.state.message}</Alert> : undefined}
+                                            </Col>
+                                        </FormGroup>
+                                    </Form>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <Panel bsStyle="default">
+                                <Panel.Heading>
+                                    <Panel.Title componentClass="h3">Transaction Details</Panel.Title>
+                                </Panel.Heading>
+                                <Panel.Body>
+                                    <h2 className="trandetails">You are buying</h2>
+                                    <h3 className="trandetails">0.0000 {this.state.currency}</h3>
+                                    <h4 className="trandetails">@ ${this.state.cryptos.USD} per {this.state.currency}</h4>
+                                    <hr/>
+                                    <h4 className="trandetails"><FaAccount/>Payment Method : virtual wallet</h4>
+                                    <h4 className="trandetails yes">Entered Amount is: ${this.state.amount}</h4>
+                                    <hr/>
+                                    <h5 className="trandetails">0.0000 BTC .................... ${this.state.amount} </h5>
+                                    <h5 className="trandetails">Remaining Wallet Amount .................... $990</h5>
+                                </Panel.Body>
+                            </Panel>
                         </Col>
                     </Row>
+
                 </Grid>
 
             </div>

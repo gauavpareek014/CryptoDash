@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import {Button,Image,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form,FormGroup,Alert,ControlLabel,FormControl} from 'react-bootstrap';
+import FaAccount from 'react-icons/lib/md/account-balance-wallet'
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -16,6 +17,7 @@ class SellPayment extends React.Component {
             cryptos: '0.00',
             currency: '',
             buy: 'SELL',
+            amount:'0.00'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -92,12 +94,20 @@ class SellPayment extends React.Component {
 
     }
 
+    changeAmount(){
+        const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
+        this.setState({
+            amount:number!=""?number:"0.00"
+        });
+    }
 
     render() {
         return (
             <div className="buySellPayment">
                 <Grid>
                     <Row>
+                        <Col xs={12} md={6}>
+                            <Row>
                         <Col xs={4} md={2}>
                             <Image src="/images/Bitcoin-icon.png" width="50px" height="50px" alt="20x20" id="btc2"
                                    onClick={this.bitcoin.bind(this)} responsive/>
@@ -123,11 +133,12 @@ class SellPayment extends React.Component {
 
                                 <FormGroup controlId="formHorizontalInput">
                                     <Col componentClass={ControlLabel} sm={2}>
-                                        {this.state.currency}:
+                                        USD:
                                     </Col>
                                     <Col sm={10} lg={4}>
                                         <FormControl type="float" ref="numberInput"
-                                                     placeholder={"0.00 " + this.state.currency} required/>
+                                                     placeholder={"0.00 " + this.state.currency} onKeyUp={this.changeAmount.bind(this)} required/>
+
                                     </Col>
                                 </FormGroup>
                                 <FormGroup>
@@ -143,6 +154,26 @@ class SellPayment extends React.Component {
                                 </FormGroup>
                             </Form>
 
+                        </Col>
+                    </Row>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <Panel bsStyle="default">
+                                <Panel.Heading>
+                                    <Panel.Title componentClass="h3">Transaction Details</Panel.Title>
+                                </Panel.Heading>
+                                <Panel.Body>
+                                    <h2 className="trandetails">You are selling</h2>
+                                    <h3 className="trandetails">0.0000 {this.state.currency}</h3>
+                                    <h4 className="trandetails">@ ${this.state.cryptos.USD} per {this.state.currency}</h4>
+                                    <hr/>
+                                    <h4 className="trandetails"><FaAccount/>Payment Method : virtual wallet</h4>
+                                    <h4 className="trandetails">Entered Amount is: ${this.state.amount}</h4>
+                                    <hr/>
+                                    <h5 className="trandetails">0.0000 BTC .................... ${this.state.amount} </h5>
+                                    <h5 className="trandetails">Remaining Wallet Amount .................... $990</h5>
+                                </Panel.Body>
+                            </Panel>
                         </Col>
                     </Row>
                 </Grid>
