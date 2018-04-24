@@ -31,7 +31,7 @@ export default class AccountSetup extends React.Component{
         console.log(walletno);
         console.log(walletamount);
 
-        Meteor.call('wallet.insert', walletamount, email, walletno);
+        Meteor.call('wallet.insert', walletamount, walletno);
         
     }
 

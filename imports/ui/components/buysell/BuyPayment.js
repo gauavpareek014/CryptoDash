@@ -1,27 +1,14 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-
-import {
-    Button,
-    Image,
-    Jumbotron,
-    Grid,
-    Row,
-    Col,
-    Panel,
-    Thumbnail,
-    Label,
-    Form,
-    FormGroup,
-    Alert,
-    ControlLabel,
-    FormControl
-} from 'react-bootstrap';
+import {Button,Image,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form,FormGroup,Alert,ControlLabel,FormControl} from 'react-bootstrap';
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Userwallet } from '../../../api/transaction';
 
 
-export default class BuyPayment extends React.Component {
+
+class BuyPayment extends React.Component {
 
     constructor(props) {
         super(props);
@@ -30,7 +17,7 @@ export default class BuyPayment extends React.Component {
             cryptos :'0.00',
             currency:'',
             buy:'BUY',
-            btc:this.props.btc,
+            btc: 1,
             eth:this.props.eth,
 
         };
@@ -86,22 +73,24 @@ export default class BuyPayment extends React.Component {
         var cryptototal = number / cryptoAmount;
         var bankAmount = number;
         var date = new Date();
-        var eth=0;
-        var btc=0;
-        var usd=-number;
+        let wallet = this.props.wallet;
+        var eth= wallet[0].eth;
+        var btc=wallet[0].btc;
+        var usd=wallet[0].usd-number;
+        var walletid =wallet[0]._id;
         if(this.state.currency == "BTC"){
-        btc=cryptototal;
+        btc=btc+cryptototal;
         
         }
         if(this.state.currency == "ETH"){
-        eth=cryptototal;
+        eth=eth+cryptototal;
         }
     
 
 
         if(usd >= 0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
-        Meteor.call('wallet.update',usd,btc,eth);
+        Meteor.call('wallet.update',walletid,usd,btc,eth);
         }
         // Clear form
         console.log(number);
@@ -110,6 +99,7 @@ export default class BuyPayment extends React.Component {
         console.log(usd);
         console.log(btc);
         console.log(eth);
+        console.log(wallet[0].usd);
         ReactDOM.findDOMNode(this.refs.numberInput).value = '';
 
     }
@@ -171,3 +161,9 @@ export default class BuyPayment extends React.Component {
         );
     }
 }
+export default withTracker(() => {
+    Meteor.subscribe('wallet');
+    return {
+        wallet: Userwallet.find({},{userId:this.userId}).fetch(),
+    };
+})(BuyPayment);

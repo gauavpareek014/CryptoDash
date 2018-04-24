@@ -36,10 +36,9 @@ Meteor.methods({
     });
     },
 
-    'wallet.insert'(walletamount, email, walletno){
+    'wallet.insert'(walletamount, walletno){
         Userwallet.insert({
             userId : this.userId,
-            email: email,
             walletno:walletno,
             usd: walletamount,
             eth: 0,
@@ -47,8 +46,11 @@ Meteor.methods({
             initialized: true
         });
     },
-    'wallet.update'(usd, btc, eth){
-        Userwallet.update(this.userId,{$set:{usd:usd, btc:btc, eth:eth}})
-        }
+    'wallet.update'(walletid, usdin, btcin, ethin){
+        Userwallet.update({_id:walletid}, { $set:  {usd: usdin}});
+        Userwallet.update({_id:walletid}, { $set:  {btc: btcin}});
+        Userwallet.update({_id:walletid}, { $set:  {eth: ethin}});
+
+    }
     });
 

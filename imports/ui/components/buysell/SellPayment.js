@@ -1,30 +1,13 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-
-import {
-    Button,
-    Image,
-    Jumbotron,
-    Grid,
-    Row,
-    Col,
-    Panel,
-    Thumbnail,
-    Label,
-    Form,
-    FormGroup,
-    Alert,
-    ControlLabel,
-    FormControl
-} from 'react-bootstrap';
+import {Button,Image,Jumbotron,Grid,Row,Col,Panel,Thumbnail,Label,Form,FormGroup,Alert,ControlLabel,FormControl} from 'react-bootstrap';
 import {Meteor} from "meteor/meteor";
 import axios from 'axios';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Userwallet } from '../../../api/transaction';
 
-<style>
-</style>
 
-
-export default class SellPayment extends React.Component {
+class SellPayment extends React.Component {
 
     constructor(props) {
         super(props);
@@ -80,23 +63,25 @@ export default class SellPayment extends React.Component {
         var cryptototal = number;
         var bankAmount = number * cryptoAmount;
         var date = new Date();
-        var btc = 10;
-        var eth = 10;
-        var usd = 10;
+        let wallet = this.props.wallet;
+        var eth= wallet[0].eth;
+        var btc=wallet[0].btc;
+        var usd=wallet[0].usd;
+        var walletid =wallet[0]._id;
         if(this.state.currency == "BTC"){
-            btc=10-cryptototal;
+            btc=btc-cryptototal;
             usd= usd+bankAmount;
             
             }
             if(this.state.currency == "ETH"){
-            eth=10-cryptototal;
+            eth=eth-cryptototal;
             usd= usd+bankAmount;
             }
 
 
         if(btc >= 0 && eth >=0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
-        Meteor.call('wallet.update',usd,btc,eth);
+        Meteor.call('wallet.update',walletid,usd,btc,eth);
 
         }
         // Clear form
@@ -141,7 +126,7 @@ export default class SellPayment extends React.Component {
                                         {this.state.currency}:
                                     </Col>
                                     <Col sm={10} lg={4}>
-                                        <FormControl type="number" ref="numberInput"
+                                        <FormControl type="float" ref="numberInput"
                                                      placeholder={"0.00 " + this.state.currency} required/>
                                     </Col>
                                 </FormGroup>
@@ -167,3 +152,10 @@ export default class SellPayment extends React.Component {
         );
     }
 }
+
+export default withTracker(() => {
+    Meteor.subscribe('wallet');
+    return {
+        wallet: Userwallet.find({},{userId:this.userId}).fetch(),
+    };
+})(SellPayment);

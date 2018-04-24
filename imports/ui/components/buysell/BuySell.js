@@ -25,13 +25,12 @@ class BuySell extends React.Component{
         let transactions = this.props.transactions;
         let wallet = this.props.wallet;
 
-        return transactions.map((transaction,wallet) => {
+        return transactions.map((transaction) => {
 
             return (
                 <Transaction
                     key={transaction._id}
                     transaction={transaction}
-                    wallet={wallet}
                 />
             );
         });
