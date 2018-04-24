@@ -1,5 +1,8 @@
 import React from "react";
 import RecentActivity  from "./RecentActivity";
+import BTCHistViz from "./BTCHistViz";
+import ETCHistViz from "./ETCHistViz";
+import CompHistViz from "./CompHistViz";
 import { Link } from "react-router"
 import { Button,Jumbotron,Grid,Row,Col,Panel } from 'react-bootstrap';
 
@@ -23,11 +26,14 @@ export default class Home extends React.Component{
                                                    <Panel.Body>
                                                        <Grid>
                                                            <Row className="show-grid">
-                                                               <Col xs={12} md={8}>
-                                                                   <span>D3 Graph React Tag</span>
+                                                               {/*<Col xs={12} md={8}>
+                                                                   <div><BTCHistViz/></div>
                                                                </Col>
-                                                               <Col xs={6} md={4}>
-                                                                   <span>Graph Check Box</span>
+                                                               <Col xs={12} md={8}>
+                                                                   <div><ETCHistViz/></div>
+                                                               </Col>*/}
+                                                               <Col xs={12} md={8}>
+                                                                   <div><CompHistViz/></div>
                                                                </Col>
                                                            </Row>
                                                        </Grid>
@@ -37,17 +43,14 @@ export default class Home extends React.Component{
                                        </Row>
                                    </Grid>
 
-                                   <Grid>
+                                   {/*<Grid>
                                        <Row className="show-grid">
                                            <Col sm={6} md={4}>
                                                <Panel bsStyle="default">
                                                    <Panel.Heading>
                                                        <Panel.Title componentClass="h3">Bitcoin Brushing Graph</Panel.Title>
                                                    </Panel.Heading>
-                                                   <Panel.Body>
-
-
-                                                   </Panel.Body>
+                                                   <Panel.Body/>
                                                </Panel>
                                            </Col>
 
@@ -56,26 +59,11 @@ export default class Home extends React.Component{
                                                    <Panel.Heading>
                                                        <Panel.Title componentClass="h3">Ethereum Brushing Graph</Panel.Title>
                                                    </Panel.Heading>
-                                                   <Panel.Body>
-
-
-                                                   </Panel.Body>
-                                               </Panel>
-                                           </Col>
-
-                                           <Col sm={6} md={4}>
-                                               <Panel bsStyle="default">
-                                                   <Panel.Heading>
-                                                       <Panel.Title componentClass="h3">Other Brushing Graph</Panel.Title>
-                                                   </Panel.Heading>
-                                                   <Panel.Body>
-
-
-                                                   </Panel.Body>
+                                                   <Panel.Body/>
                                                </Panel>
                                            </Col>
                                        </Row>
-                                   </Grid>
+                                   </Grid>*/}
                                </Col>
 
                                <Col xs={12} md={4}>
@@ -91,7 +79,7 @@ export default class Home extends React.Component{
 
                                    <Panel bsStyle="default">
                                        <Panel.Heading>
-                                           <Panel.Title componentClass="h3">Rececnt Activity</Panel.Title>
+                                           <Panel.Title componentClass="h3">Recent Activity</Panel.Title>
                                        </Panel.Heading>
                                        <Panel.Body>
                                        <RecentActivity/>
