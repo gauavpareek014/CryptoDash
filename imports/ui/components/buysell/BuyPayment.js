@@ -16,11 +16,13 @@ class BuyPayment extends React.Component {
 
         this.state = {
             cryptos :'0.00',
-            currency:'',
+            currency:'NULL',
             buy:'BUY',
             btc: 1,
             eth:this.props.eth,
-            amount:'0.00'
+            amount:'0.00',
+            usd:'0.00',
+            cryptototal:'0.0000'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -66,18 +68,20 @@ class BuyPayment extends React.Component {
         event.preventDefault();
         const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
         //var cryptos = '';
-
+        let wallet = this.props.wallet;
         console.log(this.state.cryptos);
+        if(wallet != 0){
         var transaction = 'BUY';
         var cryptocurrency = this.state.currency;
         var cryptoAmount = this.state.cryptos.USD;
         var cryptototal = number / cryptoAmount;
         var bankAmount = number;
         var date = new Date();
-        let wallet = this.props.wallet;
         var eth= wallet[0].eth;
         var btc=wallet[0].btc;
         var usd=wallet[0].usd-number;
+        this.state.usd=usd;
+        this.state.cryptototal=cryptototal;
         var walletid =wallet[0]._id;
         if(this.state.currency == "BTC"){
         btc=btc+cryptototal;
@@ -88,11 +92,28 @@ class BuyPayment extends React.Component {
         }
     
 
-
+       
         if(usd >= 0 && cryptocurrency != ''){
         Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
         Meteor.call('wallet.update',walletid,usd,btc,eth);
+        this.setState({
+            message: 'Purchase successful!',
+            bstyle: 'success',
+        });  
         }
+        else{
+            this.setState({
+                message: 'Transaction Error, please review your purchase',
+                bstyle: 'danger',
+            });
+    }
+}
+    else{
+        this.setState({
+            message: 'Account Setup Error! Please setup your account to start the transaction',
+            bstyle: 'danger',
+        });
+    }
         // Clear form
         console.log(number);
         console.log(cryptototal);
@@ -106,10 +127,16 @@ class BuyPayment extends React.Component {
     }
 
     changeAmount(){
+        let wallet = this.props.wallet;
+        if(wallet != 0){
         const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
         this.setState({
-            amount:number!=""?number:"0.00"
+            amount:number!=""?number:"0.00",
+            cryptototal:number / this.state.cryptos.USD,
+            usd:wallet[0].usd-number
+            
         });
+    }
     }
 
     render() {
@@ -149,7 +176,7 @@ class BuyPayment extends React.Component {
                                                 USD:
                                             </Col>
                                             <Col sm={10} lg={4}>
-                                                <FormControl type="number" ref="numberInput" placeholder="0.00 USD"  onKeyUp={this.changeAmount.bind(this)}
+                                                <FormControl type="float" ref="numberInput" placeholder="0.00 USD"  onKeyUp={this.changeAmount.bind(this)}
                                                              required/>
                                             </Col>
                                         </FormGroup>
@@ -175,14 +202,14 @@ class BuyPayment extends React.Component {
                                 </Panel.Heading>
                                 <Panel.Body>
                                     <h2 className="trandetails">You are buying</h2>
-                                    <h3 className="trandetails">0.0000 {this.state.currency}</h3>
+                                    <h3 className="trandetails">{this.state.cryptototal} {this.state.currency}</h3>
                                     <h4 className="trandetails">@ ${this.state.cryptos.USD} per {this.state.currency}</h4>
                                     <hr/>
                                     <h4 className="trandetails"><FaAccount/>Payment Method : virtual wallet</h4>
                                     <h4 className="trandetails yes">Entered Amount is: ${this.state.amount}</h4>
                                     <hr/>
-                                    <h5 className="trandetails">0.0000 BTC .................... ${this.state.amount} </h5>
-                                    <h5 className="trandetails">Remaining Wallet Amount .................... $990</h5>
+                                    <h5 className="trandetails">{this.state.cryptototal}{this.state.currency} .................... ${this.state.amount} </h5>
+                                    <h5 className="trandetails">Remaining Wallet Amount .................... ${this.state.usd}</h5>
                                 </Panel.Body>
                             </Panel>
                         </Col>

@@ -17,7 +17,8 @@ if (Meteor.isServer) {
         });
     });
     Meteor.publish('wallet', function walletPublication() {
-        return Userwallet.find();
+        return Userwallet.find({$or: [
+            { userId: this.userId },]});
     });
 }
 

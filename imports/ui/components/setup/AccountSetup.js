@@ -4,14 +4,18 @@ import {Meteor} from 'meteor/meteor';
 import {Grid, Row, Col, Jumbotron,Form, FormGroup,Alert, ControlLabel, FormControl,Panel,Button} from 'react-bootstrap';
 import {UserProfile} from "../../../api/UserProfile";
 import {Userwallet} from "../../../api/transaction";
+import { withTracker } from 'meteor/react-meteor-data';
+import { exists } from "fs";
 
-export default class AccountSetup extends React.Component{
+
+class AccountSetup extends React.Component{
 
     constructor(props){
         super(props);
         let emailAddress;
         if(Meteor.user()){
             emailAddress = Meteor.user().emails[0].address;
+            
         }
 
         this.state = {
@@ -27,12 +31,28 @@ export default class AccountSetup extends React.Component{
         var email = this.state.email;
         var walletno  = number;
         var walletamount = amount;
-        console.log(email);
-        console.log(walletno);
-        console.log(walletamount);
+        let wallet = this.props.wallet;
+      
+        if(wallet == 0){
+            Meteor.call('wallet.insert', walletamount, walletno);
+            this.setState({
+                message: 'Account initialized!',
+                bstyle: 'success',
+            });  
+        }
+        else{
+            this.setState({
+                message: 'Account has already been initialized',
+                bstyle: 'danger',
+            });
 
-        Meteor.call('wallet.insert', walletamount, walletno);
+            
+            console.log(email);
+            console.log(walletno);
+            console.log(walletamount);
+            
         
+        }
     }
 
 
@@ -82,7 +102,9 @@ export default class AccountSetup extends React.Component{
                                             </FormGroup>
                                             <FormGroup>
                                                 <Col smOffset={2} sm={10}>
-                                                    <Alert bsStyle="danger" id="alertBox">Account Setup Error! Please setup your account to start the transaction</Alert>
+                                                {this.state.message ? <Alert bsStyle={this.state.bstyle}
+                                                             id="alertBox">{this.state.message}</Alert> : undefined}
+              
                                                 </Col>
                                             </FormGroup>
                                         </Form>
@@ -96,3 +118,10 @@ export default class AccountSetup extends React.Component{
         );
     }
 }
+
+export default withTracker(() => {
+    Meteor.subscribe('wallet');
+    return {
+        wallet: Userwallet.find({},{"userId":this.userId}).fetch(),
+    };
+})(AccountSetup);
