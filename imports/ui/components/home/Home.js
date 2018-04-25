@@ -7,6 +7,38 @@ import { Link } from "react-router"
 import { Button,Jumbotron,Grid,Row,Col,Panel } from 'react-bootstrap';
 
 export default class Home extends React.Component{
+    constructor () {
+        super()
+        this.state = {
+            isBTCHidden: false,
+            isETHHidden: true,
+            isCompHidden: true
+        }
+    }
+    toggleBTC () {
+        this.setState({
+            isBTCHidden: false,
+            isETHHidden: true,
+            isCompHidden: true
+        })
+    }
+
+    toggleETH () {
+        this.setState({
+            isBTCHidden: true,
+            isETHHidden: false,
+            isCompHidden: true
+        })
+    }
+
+    toggleComp () {
+        this.setState({
+            isBTCHidden: true,
+            isETHHidden: true,
+            isCompHidden: false
+        })
+    }
+
     render(){
         return (
 
@@ -26,14 +58,25 @@ export default class Home extends React.Component{
                                                    <Panel.Body>
                                                        <Grid>
                                                            <Row className="show-grid">
-                                                               {/*<Col xs={12} md={8}>
-                                                                   <div><BTCHistViz/></div>
+                                                               <Col xs={12} md={8}>
+                                                                   {!this.state.isBTCHidden && <div><BTCHistViz/></div>}
                                                                </Col>
                                                                <Col xs={12} md={8}>
-                                                                   <div><ETCHistViz/></div>
-                                                               </Col>*/}
+                                                                   {!this.state.isETHHidden && <div><ETCHistViz/></div>}
+                                                               </Col>
                                                                <Col xs={12} md={8}>
-                                                                   <div><CompHistViz/></div>
+                                                                   {!this.state.isCompHidden && <div><CompHistViz/></div>}
+                                                               </Col>
+                                                               <Col xs={6} md={4}>
+                                                                   <button onClick={this.toggleBTC.bind(this)} >
+                                                                       Bitcoin
+                                                                   </button>
+                                                                   <button onClick={this.toggleETH.bind(this)} >
+                                                                       Ethereum
+                                                                   </button>
+                                                                   <button onClick={this.toggleComp.bind(this)} >
+                                                                       Price Comparison
+                                                                   </button>
                                                                </Col>
                                                            </Row>
                                                        </Grid>
