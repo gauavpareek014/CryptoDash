@@ -6,6 +6,7 @@ import {Meteor} from "meteor/meteor";
 import axios from 'axios';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Userwallet } from '../../../api/transaction';
+import { Limits } from "../../../api/limit";
 
 
 
@@ -16,15 +17,26 @@ class BuyPayment extends React.Component {
 
         this.state = {
             cryptos :'0.00',
-            currency:'NULL',
+            currency:'BTC',
             buy:'BUY',
             btc: 1,
             eth:this.props.eth,
             amount:'0.00',
             usd:'0.00',
-            cryptototal:'0.0000'
+            cryptototal:'0.000'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleOnload(){
+        axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
+        .then(res => {
+            const cryptos = res.data;
+            console.log(cryptos);
+            this.setState({cryptos: cryptos});
+        })
+    document.getElementById("btc").setAttribute("class", "");
+    document.getElementById("eth").setAttribute("class", "thumbnail");
     }
 
     bitcoin() {
@@ -56,13 +68,6 @@ class BuyPayment extends React.Component {
 
     }
 
-    buy() {
-        this.setState({buy: "BUY"});
-    }
-
-    sell() {
-        this.setState({buy: "SELL"});
-    }
 
     handleSubmit(event) {
         event.preventDefault();
@@ -80,27 +85,43 @@ class BuyPayment extends React.Component {
         var eth= wallet[0].eth;
         var btc=wallet[0].btc;
         var usd=wallet[0].usd-number;
+       
         this.state.usd=usd;
-        this.state.cryptototal=cryptototal;
+        this.state.cryptototal=Math.round(cryptototal*10000)/10000;
         var walletid =wallet[0]._id;
         if(this.state.currency == "BTC"){
-        btc=btc+cryptototal;
+        btc=Math.round((btc+cryptototal)*10000)/10000;
         
         }
         if(this.state.currency == "ETH"){
-        eth=eth+cryptototal;
+        eth=Math.round((eth+cryptototal)*10000)/10000;
         }
     
 
        
         if(usd >= 0 && cryptocurrency != ''){
-        Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
+            let limit = this.props.limits;
+            var limiter=limit[0].limiter;
+            var limitamount=limit[0].amount;
+            var limitupdate=limiter-number;
+            var limitid=limit[0]._id;
+            if(limitupdate>=0 || limitamount == 0){
+        Meteor.call('transactions.insert', transaction, Math.round(cryptototal*10000)/10000, cryptocurrency, cryptoAmount, Math.round(bankAmount*100)/100, date );
         Meteor.call('wallet.update',walletid,usd,btc,eth);
+        Meteor.call('limits.update',limitid,limitupdate)
         this.setState({
             message: 'Purchase successful!',
             bstyle: 'success',
         });  
         }
+        else{
+            this.setState({
+                message: 'Transaction Error, limit exceeded',
+                bstyle: 'danger',
+            });
+            
+        }
+        }   
         else{
             this.setState({
                 message: 'Transaction Error, please review your purchase',
@@ -115,6 +136,7 @@ class BuyPayment extends React.Component {
         });
     }
         // Clear form
+        console.log(limit);
         console.log(number);
         console.log(cryptototal);
         console.log(date);
@@ -130,10 +152,12 @@ class BuyPayment extends React.Component {
         let wallet = this.props.wallet;
         if(wallet != 0){
         const number = ReactDOM.findDOMNode(this.refs.numberInput).value.trim();
+        var cryptototal=Math.round((number / this.state.cryptos.USD)*10000)/10000;
+        var usd= Math.round((wallet[0].usd-number)*100)/100;
         this.setState({
             amount:number!=""?number:"0.00",
-            cryptototal:number / this.state.cryptos.USD,
-            usd:wallet[0].usd-number
+            cryptototal:cryptototal,
+            usd:usd
             
         });
     }
@@ -141,7 +165,7 @@ class BuyPayment extends React.Component {
 
     render() {
         return (
-            <div className="buySellPayment">
+            <div className="buySellPayment" onLoad={this.handleOnload.bind(this)}>
                 <Grid>
                     <Row>
                         <Col xs={12} md={6}>
@@ -176,7 +200,7 @@ class BuyPayment extends React.Component {
                                                 USD:
                                             </Col>
                                             <Col sm={10} lg={4}>
-                                                <FormControl type="float" ref="numberInput" placeholder="0.00 USD"  onKeyUp={this.changeAmount.bind(this)}
+                                                <FormControl type="double" ref="numberInput" placeholder="0.00 USD"  onKeyUp={this.changeAmount.bind(this)}
                                                              required/>
                                             </Col>
                                         </FormGroup>
@@ -208,7 +232,7 @@ class BuyPayment extends React.Component {
                                     <h4 className="trandetails"><FaAccount/>Payment Method : virtual wallet</h4>
                                     <h4 className="trandetails yes">Entered Amount is: ${this.state.amount}</h4>
                                     <hr/>
-                                    <h5 className="trandetails">{this.state.cryptototal}{this.state.currency} .................... ${this.state.amount} </h5>
+                                    <h5 className="trandetails">{this.state.cryptototal} {this.state.currency} .................... ${this.state.amount} </h5>
                                     <h5 className="trandetails">Remaining Wallet Amount .................... ${this.state.usd}</h5>
                                 </Panel.Body>
                             </Panel>
@@ -223,7 +247,10 @@ class BuyPayment extends React.Component {
 }
 export default withTracker(() => {
     Meteor.subscribe('wallet');
+    Meteor.subscribe('limits');
     return {
         wallet: Userwallet.find({},{userId:this.userId}).fetch(),
+        limits: Limits.find({userId: Meteor.userId()}).fetch(),
+
     };
 })(BuyPayment);

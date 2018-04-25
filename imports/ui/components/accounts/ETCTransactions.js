@@ -1,34 +1,60 @@
 import React from "react";
-import { ListGroup,ListGroupItem,Panel,Grid,Row,Col,button} from 'react-bootstrap';
+import {Meteor} from "meteor/meteor";
+import { ListGroup,ListGroupItem,Panel,Label,button,Row,Grid,Col } from 'react-bootstrap';
+import {TransactionsData} from "../../../api/transaction";
+import { withTracker } from 'meteor/react-meteor-data';
+import Transaction from "./Transaction";
 
-export default class ETCTransactions extends React.Component{
+class ETCTransactions extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            bstyle:'danger',
+        };
+
+    }
+
+    renderTask(){
+        let transactions = this.props.transactions;
+
+        return transactions.map((transaction) => {
+            return(
+                <Transaction key={transaction._id}
+                             transaction ={transaction}
+                />
+            );
+        })
+    }
+
     render(){
         return (
 
             <Panel bsStyle="default">
                 <Panel.Heading>
-                    <Panel.Title componentClass="h3">ETC Wallet</Panel.Title>
+                    <Panel.Title componentClass="h3">ETH Wallet</Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
 
                     <ListGroup>
-                        <ListGroupItem href="#link1" bsStyle="danger">
+                        {this.renderTask()}
+                        {/*
+                        <ListGroupItem href="#link1" bsStyle="success">
                             <Grid>
                                 <Row className="show-grid">
-                                    <Col md={5} sm={5}>
-                                        <button className="button button--rect">Apr</button>
-                                        <button className="button button--rect">15</button>
-                                        <button className="button button--rect">2018</button>
-                                    </Col>
-                                    <Col md={1} sm={1}>
-                                        <button className="button button--rect-color">Buy</button>
-                                    </Col>
-                                    <Col md={5} sm={5}>
-                                        <button className="button button--rect-currency">+0.00046862 BTC = $10.00</button>
-                                    </Col>
+                                        <Col md={5} sm={5}>
+                                            <button className="button button--rect">Apr</button>
+                                            <button className="button button--rect">15</button>
+                                            <button className="button button--rect">2018</button>
+                                        </Col>
+                                        <Col md={1} sm={1}>
+                                            <button className="button button--rect-color">Buy</button>
+                                        </Col>
+                                        <Col md={5} sm={5}>
+                                            <button className="button button--rect-currency">+0.00046862 BTC = $10.00</button>
+                                        </Col>
                                 </Row>
                             </Grid>
-                        </ListGroupItem>
+                        </ListGroupItem>*/}
                     </ListGroup>
                 </Panel.Body>
             </Panel>
@@ -36,4 +62,11 @@ export default class ETCTransactions extends React.Component{
         );
     }
 }
+export default withTracker(() => {
+    Meteor.subscribe('transactions');
+
+    return {
+        transactions: TransactionsData.find({},{cryptocurrency: "eth"},{ sort: { date: -1 } }).fetch(),
+    };
+})(ETCTransactions);
 

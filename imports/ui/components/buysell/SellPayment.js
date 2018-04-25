@@ -6,6 +6,8 @@ import {Meteor} from "meteor/meteor";
 import axios from 'axios';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Userwallet } from '../../../api/transaction';
+import { Limits } from "../../../api/limit";
+
 
 
 class SellPayment extends React.Component {
@@ -15,13 +17,24 @@ class SellPayment extends React.Component {
 
         this.state = {
             cryptos: '0.00',
-            currency: 'NULL',
+            currency: 'BTC',
             buy: 'SELL',
             amount:'0.000',
             usd: '0.000',
             cryptototal: '0.000'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleOnload(){
+        axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
+        .then(res => {
+            const cryptos = res.data;
+            console.log(cryptos);
+            this.setState({cryptos: cryptos});
+        })
+    document.getElementById("btc").setAttribute("class", "");
+    document.getElementById("eth").setAttribute("class", "thumbnail");
     }
 
     bitcoin() {
@@ -73,22 +86,36 @@ class SellPayment extends React.Component {
         var usd=wallet[0].usd;
         var walletid =wallet[0]._id;
         if(this.state.currency == "BTC"){
-            btc=btc-cryptototal;
-            usd= usd+bankAmount;
-            
+            btc=Math.round((btc-cryptototal)*10000)/10000;
+            usd=Math.round((usd+bankAmount)*100)/100;
             }
             if(this.state.currency == "ETH"){
-            eth=eth-cryptototal;
-            usd= usd+bankAmount;
+            eth=Math.round((eth-cryptototal)*10000)/10000;
+            usd= Math.round((usd+bankAmount)*100)/100;
             }
 
         if(btc >= 0 && eth >=0 && cryptocurrency != ''){
-        Meteor.call('transactions.insert', transaction, cryptototal, cryptocurrency, cryptoAmount, bankAmount, date );
-        Meteor.call('wallet.update',walletid,usd,btc,eth);
+            let limit = this.props.limits;
+            var limiter=limit[0].limiter;
+            var limitamount=limit[0].amount;
+            var limitupdate=limiter-bankAmount;
+            var limitid=limit[0]._id;
+            if(limitupdate>=0 || limitamount == 0){
+            Meteor.call('transactions.insert', transaction, Math.round(cryptototal*10000)/10000, cryptocurrency, cryptoAmount, Math.round(bankAmount*100)/100, date );
+            Meteor.call('wallet.update',walletid,usd,btc,eth);
         this.setState({
             message: 'sale successful!',
             bstyle: 'success',
         });  
+        }
+        else{
+            this.setState({
+                message: 'Transaction Error, limit exceeded',
+                bstyle: 'danger',
+            });
+         
+    }
+   
         }
         else{
             this.setState({
@@ -117,19 +144,25 @@ class SellPayment extends React.Component {
         let wallet = this.props.wallet;
 
         if(wallet != 0){
-        
+        var cryptototal=Math.round((number * this.state.cryptos.USD)*100)/100;
         this.setState({
             amount:number!=""?number:"0.00",
-            cryptototal:number * this.state.cryptos.USD, 
+            cryptototal:cryptototal, 
         });
+        
+        var btcwallet=wallet[0].btc-number;
+        var ethwallet=wallet[0].eth-number;
+        btcwallet=Math.round(btcwallet*10000)/10000;
+        ethwallet=Math.round(ethwallet*10000)/10000;
+
         if(this.state.currency == 'ETH'){
         this.setState({
-            usd:wallet[0].eth-number
+            usd:ethwallet
         })
     }
         if(this.state.currency == 'BTC'){
             this.setState({
-                usd:wallet[0].btc-number
+                usd:btcwallet
             })
         }
     }
@@ -137,7 +170,7 @@ class SellPayment extends React.Component {
 
     render() {
         return (
-            <div className="buySellPayment">
+            <div className="buySellPayment" onLoad={this.handleOnload.bind(this)}>
                 <Grid>
                     <Row>
                         <Col xs={12} md={6}>
@@ -170,7 +203,7 @@ class SellPayment extends React.Component {
                                         {this.state.currency}:
                                     </Col>
                                     <Col sm={10} lg={4}>
-                                        <FormControl type="float" ref="numberInput"
+                                        <FormControl type="double" ref="numberInput"
                                                      placeholder={"0.00 " + this.state.currency} onKeyUp={this.changeAmount.bind(this)} required/>
 
                                     </Col>
@@ -220,7 +253,10 @@ class SellPayment extends React.Component {
 
 export default withTracker(() => {
     Meteor.subscribe('wallet');
+    Meteor.subscribe('limits');
     return {
         wallet: Userwallet.find({},{"userId":this.userId}).fetch(),
+        limits: Limits.find({userId: Meteor.userId()}).fetch(),
+
     };
 })(SellPayment);

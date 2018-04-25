@@ -6,6 +6,7 @@ import {UserProfile} from "../../../api/UserProfile";
 import {Userwallet} from "../../../api/transaction";
 import { withTracker } from 'meteor/react-meteor-data';
 import { exists } from "fs";
+import { Limits } from "../../../api/limit";
 
 
 class AccountSetup extends React.Component{
@@ -32,12 +33,15 @@ class AccountSetup extends React.Component{
         var walletno  = number;
         var walletamount = amount;
         let wallet = this.props.wallet;
-      
+        var date = new Date();
+        var limit=0;
         if(wallet == 0){
             Meteor.call('wallet.insert', walletamount, walletno);
+            Meteor.call('limits.upsert',limit,date);
             this.setState({
                 message: 'Account initialized!',
                 bstyle: 'success',
+                
             });  
         }
         else{
@@ -97,7 +101,7 @@ class AccountSetup extends React.Component{
                                                      Wallet Amount
                                                 </Col>
                                                 <Col sm={10} lg={4}>
-                                                    <FormControl type="number" placeholder="$1000" ref="walletamount" defaultValue = "1000"  readOnly="readOnly" required/>
+                                                    <FormControl type="number" placeholder="$10000" ref="walletamount" defaultValue = "10000"  readOnly="readOnly" required/>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup>
@@ -121,7 +125,9 @@ class AccountSetup extends React.Component{
 
 export default withTracker(() => {
     Meteor.subscribe('wallet');
+    Meteor.subscribe('limits');
     return {
         wallet: Userwallet.find({},{"userId":this.userId}).fetch(),
+        limits: Limits.find({userId: Meteor.userId()}).fetch(),
     };
 })(AccountSetup);

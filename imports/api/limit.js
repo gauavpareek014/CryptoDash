@@ -21,8 +21,13 @@ Meteor.methods({
             // Modifier
             $set: {
                 amount :limitAmount,
+                limiter: limitAmount,
                 date : date,
             }
         });
     },
+    'limits.update'(limitid,limitAmount){
+        Limits.update({_id:limitid}, { $set:  {limiter: limitAmount}});
+
+    }
 });
