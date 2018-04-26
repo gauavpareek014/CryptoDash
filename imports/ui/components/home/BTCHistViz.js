@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    VictoryChart, VictoryLine, VictoryZoomContainer,
-    VictoryBrushContainer, VictoryAxis, VictoryTooltip
+    VictoryChart, VictoryLine, VictoryBrushContainer,
+    VictoryAxis, VictoryTooltip, createContainer
 } from "victory";
 import axios from 'axios';
 
@@ -106,12 +106,17 @@ export default class BTCHistViz extends React.Component {
         return (date.getUTCMonth()+1)+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
     }
 
+    getDateStringArgs(date) {
+        return (date.getUTCMonth()+1)+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
+    }
+
     render() {
+        const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
         return (
             <div>
-                <VictoryChart width={600} height={470} scale={{ x: "time" }}
+                <VictoryChart width={650} height={470} scale={{ x: "time" }}
                               containerComponent={
-                                  <VictoryZoomContainer
+                                  <VictoryZoomVoronoiContainer
                                       zoomDimension="x"
                                       zoomDomain={this.state.zoomDomain}
                                       onZoomDomainChange={this.handleZoom.bind(this)}
@@ -123,15 +128,22 @@ export default class BTCHistViz extends React.Component {
                             data: { stroke: "tomato" }
                         }}
                         data={this.state.dataSet}
-                        labels={(d) => '${d.Date}: ${d.Close}'}
+                        labels={(d) => `${this.getDateStringArgs(d.x)}: $${d.y}`}
                         labelComponent={<VictoryTooltip />}
-                        x="Date"
+                        x={(d) => new Date(d.Date)}
                         y="Close"
                     />
+                    <VictoryAxis
+                        fixLabelOverlap={true}
+                    />
+                    <VictoryAxis
+                        dependentAxis
+                    />
                 </VictoryChart>
+
                 <VictoryChart
                     padding={{ top: 0, left: 50, right: 50, bottom: 30 }}
-                    width={600} height={100} scale={{ x: "time" }}
+                    width={650} height={100} scale={{ x: "time" }}
                     containerComponent={
                         <VictoryBrushContainer
                             brushDimension="x"
@@ -141,14 +153,14 @@ export default class BTCHistViz extends React.Component {
                     }
                 >
                     <VictoryAxis
-                        tickFormat={(x) => new Date(x).getFullYear()}
+                        fixLabelOverlap={true}
                     />
                     <VictoryLine
                         style={{
                             data: { stroke: "tomato" }
                         }}
                         data={this.state.dataSet}
-                        x="Date"
+                        x={(d) => new Date(d.Date)}
                         y="Close"
                     />
                 </VictoryChart>

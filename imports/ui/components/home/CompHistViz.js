@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     VictoryChart, VictoryLine, VictoryZoomContainer,
-    VictoryBrushContainer, VictoryAxis, VictoryTooltip
+    VictoryBrushContainer, VictoryAxis, VictoryTooltip, createContainer
 } from "victory";
 import axios from "axios/index";
 
@@ -167,12 +167,17 @@ export default class CompHistViz extends React.Component {
         return (date.getUTCMonth()+1)+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
     }
 
+    getDateStringArgs(date) {
+        return (date.getUTCMonth()+1)+"/"+date.getUTCDate()+"/"+date.getUTCFullYear();
+    }
+
     render() {
+        const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
         return (
             <div>
                 <VictoryChart width={600} height={470} scale={{ x: "time" }}
                               containerComponent={
-                                  <VictoryZoomContainer
+                                  <VictoryZoomVoronoiContainer
                                       zoomDimension="x"
                                       zoomDomain={this.state.zoomDomain}
                                       onZoomDomainChange={this.handleZoom.bind(this)}
@@ -184,9 +189,9 @@ export default class CompHistViz extends React.Component {
                             data: { stroke: "tomato" }
                         }}
                         data={this.state.btcData}
-                        labels={(d) => '${d.Date}: ${d.Close}'}
+                        labels={(d) => `${this.getDateStringArgs(d.x)}: $${d.y}`}
                         labelComponent={<VictoryTooltip />}
-                        x="Date"
+                        x={(d) => new Date(d.Date)}
                         y="Close"
                     />
 
@@ -195,10 +200,17 @@ export default class CompHistViz extends React.Component {
                             data: { stroke: "steelblue" }
                         }}
                         data={this.state.ethData}
-                        labels={(d) => '${d.Date}: ${d.Close}'}
+                        labels={(d) => `${this.getDateStringArgs(d.x)}: $${d.y}`}
                         labelComponent={<VictoryTooltip />}
-                        x="Date"
+                        x={(d) => new Date(d.Date)}
                         y="Close"
+                    />
+
+                    <VictoryAxis
+                        fixLabelOverlap={true}
+                    />
+                    <VictoryAxis
+                        dependentAxis
                     />
 
                 </VictoryChart>
@@ -214,14 +226,14 @@ export default class CompHistViz extends React.Component {
                     }
                 >
                     <VictoryAxis
-                        tickFormat={(x) => new Date(x).getFullYear()}
+                        fixLabelOverlap={true}
                     />
                     <VictoryLine
                         style={{
                             data: { stroke: "tomato" }
                         }}
                         data={this.state.btcData}
-                        x="Date"
+                        x={(d) => new Date(d.Date)}
                         y="Close"
                     />
 
@@ -230,7 +242,7 @@ export default class CompHistViz extends React.Component {
                             data: { stroke: "steelblue" }
                         }}
                         data={this.state.ethData}
-                        x="Date"
+                        x={(d) => new Date(d.Date)}
                         y="Close"
                     />
                 </VictoryChart>
