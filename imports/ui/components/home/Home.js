@@ -2,6 +2,7 @@ import React from "react";
 import RecentActivity  from "./RecentActivity";
 import { Link } from "react-router"
 import { Button,Jumbotron,Grid,Row,Col,Panel } from 'react-bootstrap';
+import PortfolioPerformance from "./PortfolioPerformance";
 
 export default class Home extends React.Component{
     render(){
@@ -83,15 +84,15 @@ export default class Home extends React.Component{
                                        <Panel.Heading>
                                            <Panel.Title componentClass="h3">Portfolio Performance</Panel.Title>
                                        </Panel.Heading>
-                                       <Panel.Body>
-
-
+                                       <Panel.Body >
+                                           <PortfolioPerformance/>
+                                        
                                        </Panel.Body>
                                    </Panel>
 
                                    <Panel bsStyle="default">
                                        <Panel.Heading>
-                                           <Panel.Title componentClass="h3">Rececnt Activity</Panel.Title>
+                                           <Panel.Title componentClass="h3">Recent Activity</Panel.Title>
                                        </Panel.Heading>
                                        <Panel.Body>
                                        <RecentActivity/>
