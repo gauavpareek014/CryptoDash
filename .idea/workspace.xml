@@ -4,10 +4,7 @@
     <list default="true" id="44f51500-e9c0-4ab8-ac17-12d87ea5cd7f" name="Default" comment="Limit Configuration UI, Buy Sell Image Fixes and icons for tabs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/buysell/BuyPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/buysell/BuyPayment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/buysell/BuySell.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/buysell/BuySell.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/buysell/SellPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/buysell/SellPayment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/buysell/Transaction.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/buysell/Transaction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/ui/components/home/PortfolioPerformance.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/home/PortfolioPerformance.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,36 +17,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="limit.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/api/limit.js">
+    <leaf>
+      <file leaf-file-name="BTCTransactions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/BTCTransactions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="263">
+              <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConfigureLimit.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/settings/ConfigureLimit.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuySell.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/BuySell.js">
+      <file leaf-file-name="Transaction.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/Transaction.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="359">
-              <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+              <caret line="42" column="35" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PortfolioPerformance.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/home/PortfolioPerformance.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -60,41 +54,8 @@
       <file leaf-file-name="main.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/main.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="95" column="15" lean-forward="true" selection-start-line="95" selection-start-column="15" selection-end-line="95" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuyPayment.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/BuyPayment.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Transaction.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/Transaction.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
-              <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SellPayment.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/SellPayment.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="138" column="64" selection-start-line="138" selection-start-column="59" selection-end-line="138" selection-end-column="64" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="485">
+              <caret line="118" column="23" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -110,8 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>card</find>
-      <find>Customized</find>
       <find>.panel-de</find>
       <find>panel-d</find>
       <find>panel</find>
@@ -140,6 +99,8 @@
       <find>numberIn</find>
       <find>onKey</find>
       <find>USD</find>
+      <find>limit</find>
+      <find>Label</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -151,7 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/imports/ui/TitleBar.js" />
         <option value="$PROJECT_DIR$/imports/ui/BuySell.js" />
         <option value="$PROJECT_DIR$/imports/ui/BuySellPayment.js" />
         <option value="$PROJECT_DIR$/imports/ui/BuySellTab.js" />
@@ -188,7 +148,6 @@
         <option value="$PROJECT_DIR$/server/main.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/new.js" />
         <option value="$PROJECT_DIR$/imports/api/limit.js" />
-        <option value="$PROJECT_DIR$/imports/ui/components/accounts/Transaction.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/login/Carousel.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/login/TitleBar.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/settings/Limit.js" />
@@ -198,10 +157,12 @@
         <option value="$PROJECT_DIR$/imports/ui/components/settings/ConfigureLimit.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/buysell/BuySell.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/buysell/TransactionDetails.js" />
-        <option value="$PROJECT_DIR$/client/main.scss" />
         <option value="$PROJECT_DIR$/imports/ui/components/buysell/BuyPayment.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/buysell/Transaction.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/buysell/SellPayment.js" />
+        <option value="$PROJECT_DIR$/imports/ui/components/home/PortfolioPerformance.js" />
+        <option value="$PROJECT_DIR$/client/main.scss" />
+        <option value="$PROJECT_DIR$/imports/ui/components/accounts/Transaction.js" />
       </list>
     </option>
   </component>
@@ -222,9 +183,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="336" />
-    <option name="y" value="12" />
-    <option name="width" value="1035" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="980" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -238,7 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -330,6 +290,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -415,6 +376,8 @@
       <workItem from="1524494100752" duration="26000" />
       <workItem from="1524520133182" duration="9414000" />
       <workItem from="1524545781030" duration="646000" />
+      <workItem from="1524598079393" duration="17000" />
+      <workItem from="1524841152953" duration="5153000" />
     </task>
     <task id="LOCAL-00001" summary="Limit Configuration UI, Buy Sell Image Fixes and icons for tabs">
       <created>1524071605354</created>
@@ -434,42 +397,30 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191691000" />
+    <option name="totallyTimeSpent" value="197334000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" x="761" y="154" width="398" height="726" id="Project" order="3" sideWeight="0.9089655" side_tool="true" visible="true" weight="0.18266979" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" weight="0.32922733" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.1842546" />
-      <window_info anchor="bottom" id="Run" order="6" />
       <window_info id="npm" order="0" sideWeight="0.09103448" side_tool="true" weight="0.20729166" />
+      <window_info anchor="bottom" id="Run" order="6" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
-      <window_info id="npm" order="0" sideWeight="0.09103448" side_tool="true" weight="0.20729166" />
-      <window_info anchor="bottom" id="Version Control" order="1" weight="0.1842546" />
-      <window_info active="true" content_ui="combo" x="761" y="154" width="398" height="726" id="Project" order="3" sideWeight="0.9089655" side_tool="true" visible="true" weight="0.18266979" />
-      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="10" />
-      <window_info anchor="bottom" id="Run" order="6" />
       <window_info anchor="bottom" id="Find" order="5" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" weight="0.32922733" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32998326" />
-      <window_info id="Favorites" order="1" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,16 +475,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/SellPayment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="159" column="47" lean-forward="true" selection-start-line="159" selection-start-column="47" selection-end-line="159" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/Task.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -640,13 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/ETCTransactions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="68" selection-start-line="14" selection-start-column="68" selection-end-line="14" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -762,30 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/Transaction.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/BTCTransactions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="66" column="34" lean-forward="true" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/home/RecentActivity.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/login/TabUI.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -800,16 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/api/limit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/BuySellTab.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -817,66 +717,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/settings/ConfigureLimit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/settings/Limit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/BuySell.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/main.scss">
+    <entry file="file://$PROJECT_DIR$/imports/api/limit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="95" column="15" lean-forward="true" selection-start-line="95" selection-start-column="15" selection-end-line="95" selection-end-column="15" />
+        <state relative-caret-position="187">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/Transaction.js">
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/settings/ConfigureLimit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/ETCTransactions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/BuyPayment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="65" />
+        <state relative-caret-position="-767">
+          <caret line="108" column="72" lean-forward="true" selection-start-line="108" selection-start-column="72" selection-end-line="108" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/settings/Limit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/Transaction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="36" column="102" selection-start-line="35" selection-start-column="83" selection-end-line="36" selection-end-column="102" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/buysell/SellPayment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="138" column="64" selection-start-line="138" selection-start-column="59" selection-end-line="138" selection-end-column="64" />
+        <state relative-caret-position="144">
+          <caret line="212" column="77" selection-start-line="212" selection-start-column="71" selection-end-line="212" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/home/RecentActivity.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/BTCTransactions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="118" column="23" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/home/PortfolioPerformance.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/accounts/Transaction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="42" column="35" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

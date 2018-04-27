@@ -2,6 +2,7 @@ import React from "react";
 import {Meteor} from "meteor/meteor";
 import Transaction from "./../buysell/Transaction";
 import { withTracker } from 'meteor/react-meteor-data';
+import { Button,ListGroup,ListGroupItem,Image } from 'react-bootstrap';
 import { TransactionsData } from '../../../api/transaction';
 import axios from 'axios';
 
@@ -109,12 +110,21 @@ class PortfolioPerformance extends React.Component{
 
     render(){
         return (
-            <div onClick={this.handleOnLoad.bind(this)}>
-            <ul>
-           < h4 className="trandetails" onClick={this.renderTasks.bind(this)}> BTC Profit: {this.state.currency} {this.state.cryptototal}</h4>
-           < h4 className="trandetails" onClick={this.renderTasks2.bind(this)}> ETH Profit: {this.state.currency2} {this.state.cryptototal2}</h4>
-            </ul> 
-            </div>
+
+
+            <ListGroup>
+                <ListGroupItem bsStyle="success">
+                    <div onClick={this.handleOnLoad.bind(this)}>
+                        <ul>
+                            <Image src="/images/Bitcoin-icon.png" width="30px" height="30px" title="Bitcoin"
+                            />  <Button bsStyle="danger" onClick={this.renderTasks.bind(this)}> {this.state.currency} {this.state.cryptototal}</Button>
+                            <hr className="line"/>
+                            <Image src="/images/etherium-icon.png" width="30px" height="30px" title="Ethereum"
+                            />  <Button className="trandetails" bsStyle="danger" onClick={this.renderTasks2.bind(this)}> {this.state.currency2} {this.state.cryptototal2}</Button>
+                        </ul>
+                    </div>
+                </ListGroupItem>
+            </ListGroup>
         );
     }
 }
