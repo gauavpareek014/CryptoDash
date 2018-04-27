@@ -40,7 +40,7 @@ export default class Transaction extends Component{
                             <button className="button button--rect-color">{this.props.transaction.transaction}</button>
                         </Col>
                         <Col md={5} sm={5}>
-                            <button className="button button--rect-currency">{this.props.transaction.cryptototal} BTC = ${this.props.transaction.bankAmount}</button>
+                            <button className="button button--rect-currency">{this.props.transaction.cryptototal} {this.props.transaction.cryptocurrency} = ${this.props.transaction.bankAmount}</button>
                         </Col>
                     </Row>
                 </Grid>

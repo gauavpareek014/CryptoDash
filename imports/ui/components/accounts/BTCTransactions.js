@@ -39,24 +39,6 @@ class BTCTransactions extends React.Component{
 
                     <ListGroup>
                         {this.renderTask()}
-                        {/*
-                        <ListGroupItem href="#link1" bsStyle="success">
-                            <Grid>
-                                <Row className="show-grid">
-                                        <Col md={5} sm={5}>
-                                            <button className="button button--rect">Apr</button>
-                                            <button className="button button--rect">15</button>
-                                            <button className="button button--rect">2018</button>
-                                        </Col>
-                                        <Col md={1} sm={1}>
-                                            <button className="button button--rect-color">Buy</button>
-                                        </Col>
-                                        <Col md={5} sm={5}>
-                                            <button className="button button--rect-currency">+0.00046862 BTC = $10.00</button>
-                                        </Col>
-                                </Row>
-                            </Grid>
-                        </ListGroupItem>*/}
                     </ListGroup>
                 </Panel.Body>
             </Panel>
@@ -68,7 +50,7 @@ export default withTracker(() => {
     Meteor.subscribe('transactions');
 
     return {
-        transactions: TransactionsData.find({},{cryptocurrency: "btc"},{ sort: { date: -1 } }).fetch(),
+        transactions: TransactionsData.find({cryptocurrency:"BTC"},{ sort: { date: -1 }}).fetch(),
     };
 })(BTCTransactions);
 
