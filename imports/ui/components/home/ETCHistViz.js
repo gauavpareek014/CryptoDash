@@ -10,8 +10,6 @@ export default class ETCHistViz extends React.Component {
         super();
         this.state = {
             InitialRowAdded: false,
-            zoomDomain: { x: [new Date(2017, 10, 1), new Date(2018, 5, 31)] },
-            selectedDomain: { x: [new Date(2017, 10, 1), new Date(2018, 5, 31)] },
             dataSet: [
                 {"Date": "1/1/2018","Close": 772.64},
                 {"Date": "1/2/2018","Close": 884.44},

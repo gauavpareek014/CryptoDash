@@ -10,8 +10,6 @@ export default class CompHistViz extends React.Component {
         super();
         this.state = {
             InitialRowAdded: false,
-            zoomDomain: { x: [new Date(1990, 1, 1), new Date(2009, 1, 1)] },
-            selectedDomain: { x: [new Date(1990, 1, 1), new Date(2009, 1, 1)] },
             btcData: [
                 {"Date": "1/1/2018","Close": 13657.2},
                 {"Date": "1/2/2018","Close": 14982.1},

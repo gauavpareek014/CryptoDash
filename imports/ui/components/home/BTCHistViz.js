@@ -10,8 +10,6 @@ export default class BTCHistViz extends React.Component {
         super();
         this.state = {
             InitialRowAdded: false,
-            zoomDomain: { x: [new Date(2017, 10, 1), new Date(2018, 5, 31)] },
-            selectedDomain: { x: [new Date(2017, 10, 1), new Date(2018, 5, 31)] },
             dataSet: [
                 {"Date": "1/1/2018","Close": 13657.2},
                 {"Date": "1/2/2018","Close": 14982.1},
@@ -114,7 +112,7 @@ export default class BTCHistViz extends React.Component {
         const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
         return (
             <div>
-                <VictoryChart width={650} height={470} scale={{ x: "time" }}
+                <VictoryChart width={650} height={370} scale={{ x: "time" }}
                               containerComponent={
                                   <VictoryZoomVoronoiContainer
                                       zoomDimension="x"
