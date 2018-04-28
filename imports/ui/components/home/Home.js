@@ -54,7 +54,16 @@ export default class Home extends React.Component{
                                            <Col xs={12} md={12} lg={12}>
                                                <Panel bsStyle="default">
                                                    <Panel.Heading>
-                                                       <Panel.Title componentClass="h3">Price Comparison Panel</Panel.Title>
+                                                       <Panel.Title componentClass="h3">Price Comparison Panel      <Button  bsStyle="danger" onClick={this.toggleBTC.bind(this)} >
+                                                                       Bitcoin
+                                                                   </Button>
+                                                                   <Button  bsStyle="danger" onClick={this.toggleETH.bind(this)} >
+                                                                       Ethereum
+                                                                   </Button>
+                                                                   <Button  bsStyle="danger"  onClick={this.toggleComp.bind(this)} >
+                                                                       Price Comparison
+                                                                   </Button></Panel.Title>
+                                                       
                                                    </Panel.Heading>
                                                    <Panel.Body>
                                                        <Grid>
@@ -67,17 +76,6 @@ export default class Home extends React.Component{
                                                                </Col>
                                                                <Col xs={12} md={8}>
                                                                    {!this.state.isCompHidden && <div><CompHistViz/></div>}
-                                                               </Col>
-                                                               <Col xs={6} md={4}>
-                                                                   <button onClick={this.toggleBTC.bind(this)} >
-                                                                       Bitcoin
-                                                                   </button>
-                                                                   <button onClick={this.toggleETH.bind(this)} >
-                                                                       Ethereum
-                                                                   </button>
-                                                                   <button onClick={this.toggleComp.bind(this)} >
-                                                                       Price Comparison
-                                                                   </button>
                                                                </Col>
                                                            </Row>
                                                        </Grid>
