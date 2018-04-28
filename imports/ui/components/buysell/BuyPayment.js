@@ -134,7 +134,12 @@ class BuyPayment extends React.Component {
             message: 'Account Setup Error! Please setup your account to start the transaction',
             bstyle: 'danger',
         });
+        
     }
+    setTimeout(function () {
+        this.setState({message: ''});
+    }.bind(this), 3000);
+
         // Clear form
         console.log(limit);
         console.log(number);
@@ -184,17 +189,6 @@ class BuyPayment extends React.Component {
                             <Row>
                                 <Col xs={20} md={20}>
                                     <Form horizontal className="customForm" onSubmit={this.handleSubmit.bind(this)}>
-                                        <FormGroup controlId="formHorizontalCrypto">
-                                            <Col componentClass={ControlLabel} sm={2}>
-                                                {this.state.currency}:
-                                            </Col>
-                                            <Col sm={10} lg={4}>
-                                                <FormControl type="text" placeholder={this.state.cryptos.USD}
-                                                             defaultValue={this.state.cryptos.USD}
-                                                             readOnly="readOnly"></FormControl>
-                                            </Col>
-                                        </FormGroup>
-
                                         <FormGroup controlId="formHorizontalInput">
                                             <Col componentClass={ControlLabel} sm={2}>
                                                 USD:
@@ -204,6 +198,18 @@ class BuyPayment extends React.Component {
                                                              required/>
                                             </Col>
                                         </FormGroup>
+                                        <FormGroup controlId="formHorizontalCrypto">
+                                            <Col componentClass={ControlLabel} sm={2}>
+                                                {this.state.currency}:
+                                            </Col>
+                                            <Col sm={10} lg={4}>
+                                                <FormControl type="text" placeholder={this.state.cryptos.USD}
+                                                             value={this.state.cryptos.USD}
+                                                             readOnly="readOnly"></FormControl>
+                                            </Col>
+                                        </FormGroup>
+
+   
                                         <FormGroup>
                                             <Col smOffset={2} sm={10}>
                                                 <Button type="submit" bsStyle="danger">{this.state.buy}</Button>

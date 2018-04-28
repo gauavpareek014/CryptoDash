@@ -49,7 +49,10 @@ class AccountSetup extends React.Component{
                 message: 'Account has already been initialized',
                 bstyle: 'danger',
             });
-
+            setTimeout(function () {
+                this.setState({message: ''});
+            }.bind(this), 3000);
+    
             
             console.log(email);
             console.log(walletno);
@@ -92,7 +95,7 @@ class AccountSetup extends React.Component{
                                                      Wallet Number
                                                 </Col>
                                                 <Col sm={10} lg={4}>
-                                                    <FormControl type="number" placeholder="545564345" ref="walletno" readOnly="readOnly" defaultValue = "545564345" required/>
+                                                    <FormControl type="number" placeholder="545564345" ref="walletno" readOnly="readOnly" defaultValue = {Math.floor(Math.random() * 1000000000)} required/>
                                                 </Col>
                                             </FormGroup>
 
