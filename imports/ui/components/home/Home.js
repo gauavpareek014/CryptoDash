@@ -1,45 +1,10 @@
 import React from "react";
 import RecentActivity  from "./RecentActivity";
-import BTCHistViz from "./BTCHistViz";
-import ETCHistViz from "./ETCHistViz";
-import CompHistViz from "./CompHistViz";
 import { Link } from "react-router"
 import { Button,Jumbotron,Grid,Row,Col,Panel } from 'react-bootstrap';
 import PortfolioPerformance from "./PortfolioPerformance";
 
 export default class Home extends React.Component{
-    constructor () {
-        super()
-        this.state = {
-            isBTCHidden: false,
-            isETHHidden: true,
-            isCompHidden: true
-        }
-    }
-    toggleBTC () {
-        this.setState({
-            isBTCHidden: false,
-            isETHHidden: true,
-            isCompHidden: true
-        })
-    }
-
-    toggleETH () {
-        this.setState({
-            isBTCHidden: true,
-            isETHHidden: false,
-            isCompHidden: true
-        })
-    }
-
-    toggleComp () {
-        this.setState({
-            isBTCHidden: true,
-            isETHHidden: true,
-            isCompHidden: false
-        })
-    }
-
     render(){
         return (
 
@@ -60,24 +25,10 @@ export default class Home extends React.Component{
                                                        <Grid>
                                                            <Row className="show-grid">
                                                                <Col xs={12} md={8}>
-                                                                   {!this.state.isBTCHidden && <div><BTCHistViz/></div>}
-                                                               </Col>
-                                                               <Col xs={12} md={8}>
-                                                                   {!this.state.isETHHidden && <div><ETCHistViz/></div>}
-                                                               </Col>
-                                                               <Col xs={12} md={8}>
-                                                                   {!this.state.isCompHidden && <div><CompHistViz/></div>}
+                                                                   <span>D3 Graph React Tag</span>
                                                                </Col>
                                                                <Col xs={6} md={4}>
-                                                                   <button onClick={this.toggleBTC.bind(this)} >
-                                                                       Bitcoin
-                                                                   </button>
-                                                                   <button onClick={this.toggleETH.bind(this)} >
-                                                                       Ethereum
-                                                                   </button>
-                                                                   <button onClick={this.toggleComp.bind(this)} >
-                                                                       Price Comparison
-                                                                   </button>
+                                                                   <span>Graph Check Box</span>
                                                                </Col>
                                                            </Row>
                                                        </Grid>
@@ -87,14 +38,17 @@ export default class Home extends React.Component{
                                        </Row>
                                    </Grid>
 
-                                   {/*<Grid>
+                                   <Grid>
                                        <Row className="show-grid">
                                            <Col sm={6} md={4}>
                                                <Panel bsStyle="default">
                                                    <Panel.Heading>
                                                        <Panel.Title componentClass="h3">Bitcoin Brushing Graph</Panel.Title>
                                                    </Panel.Heading>
-                                                   <Panel.Body/>
+                                                   <Panel.Body>
+
+
+                                                   </Panel.Body>
                                                </Panel>
                                            </Col>
 
@@ -103,11 +57,26 @@ export default class Home extends React.Component{
                                                    <Panel.Heading>
                                                        <Panel.Title componentClass="h3">Ethereum Brushing Graph</Panel.Title>
                                                    </Panel.Heading>
-                                                   <Panel.Body/>
+                                                   <Panel.Body>
+
+
+                                                   </Panel.Body>
+                                               </Panel>
+                                           </Col>
+
+                                           <Col sm={6} md={4}>
+                                               <Panel bsStyle="default">
+                                                   <Panel.Heading>
+                                                       <Panel.Title componentClass="h3">Other Brushing Graph</Panel.Title>
+                                                   </Panel.Heading>
+                                                   <Panel.Body>
+
+
+                                                   </Panel.Body>
                                                </Panel>
                                            </Col>
                                        </Row>
-                                   </Grid>*/}
+                                   </Grid>
                                </Col>
 
                                <Col xs={12} md={4}>
