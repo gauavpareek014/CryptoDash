@@ -92,27 +92,18 @@ export default class Home extends React.Component{
                                        </Row>
                                    </Grid>
 
-                                   {/*<Grid>
+                                   <Grid>
                                        <Row className="show-grid">
-                                           <Col sm={6} md={4}>
+                                           <Col sm={12} md={12}>
                                                <Panel bsStyle="default">
                                                    <Panel.Heading>
-                                                       <Panel.Title componentClass="h3">Bitcoin Brushing Graph</Panel.Title>
-                                                   </Panel.Heading>
-                                                   <Panel.Body/>
-                                               </Panel>
-                                           </Col>
-
-                                           <Col sm={6} md={4}>
-                                               <Panel bsStyle="default">
-                                                   <Panel.Heading>
-                                                       <Panel.Title componentClass="h3">Ethereum Brushing Graph</Panel.Title>
+                                                       <Panel.Title componentClass="h3">Voice I/O</Panel.Title>
                                                    </Panel.Heading>
                                                    <Panel.Body/>
                                                </Panel>
                                            </Col>
                                        </Row>
-                                   </Grid>*/}
+                                   </Grid>
                                </Col>
 
                                <Col xs={12} md={4}>

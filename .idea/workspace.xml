@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="44f51500-e9c0-4ab8-ac17-12d87ea5cd7f" name="Default" comment="Limit Configuration UI, Buy Sell Image Fixes and icons for tabs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/home/BTCHistViz.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/home/BTCHistViz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/home/CompHistViz.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/home/CompHistViz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/components/home/ETCHistViz.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/home/ETCHistViz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imports/ui/components/home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/components/home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,8 +20,8 @@
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/home/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="64" column="109" selection-start-line="64" selection-start-column="109" selection-end-line="64" selection-end-column="109" />
+            <state relative-caret-position="223">
+              <caret line="99" column="97" selection-start-line="99" selection-start-column="97" selection-end-line="99" selection-end-column="97" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -85,15 +79,6 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/main.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
             </state>
           </provider>
         </entry>
@@ -392,7 +377,7 @@
       <workItem from="1524598079393" duration="17000" />
       <workItem from="1524841152953" duration="5153000" />
       <workItem from="1524928231827" duration="9000" />
-      <workItem from="1524937037446" duration="7808000" />
+      <workItem from="1524937037446" duration="8231000" />
     </task>
     <task id="LOCAL-00001" summary="Limit Configuration UI, Buy Sell Image Fixes and icons for tabs">
       <created>1524071605354</created>
@@ -412,7 +397,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205151000" />
+    <option name="totallyTimeSpent" value="205574000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
@@ -824,6 +809,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="108" column="28" lean-forward="true" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/home/ETCHistViz.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -834,17 +826,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/main.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/home/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="64" column="109" selection-start-line="64" selection-start-column="109" selection-end-line="64" selection-end-column="109" />
+        <state relative-caret-position="223">
+          <caret line="99" column="97" selection-start-line="99" selection-start-column="97" selection-end-line="99" selection-end-column="97" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
