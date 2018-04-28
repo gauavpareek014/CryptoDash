@@ -64,11 +64,9 @@ export default class Home extends React.Component{
                                                            <Row className="show-grid d3">
                                                                <Col xs={12} md={12} mdOffset={6} lgOffset={6}>
                                                                    <ButtonToolbar>
-                                                                       <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
                                                                            <Button bsStyle="danger" onClick={this.toggleBTC.bind(this)}>Bitcoin</Button>
                                                                            <Button bsStyle="danger" onClick={this.toggleETH.bind(this)}>Ethereum</Button>
                                                                            <Button bsStyle="danger" value={3} onClick={this.toggleComp.bind(this)}>Price Comparison</Button>
-                                                                       </ToggleButtonGroup>
                                                                    </ButtonToolbar>
                                                                </Col>
                                                            </Row>
