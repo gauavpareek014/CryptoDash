@@ -175,7 +175,7 @@ export default class CompHistViz extends React.Component {
             <div>
                 <VictoryChart width={600} height={470} scale={{ x: "time" }}
                               containerComponent={
-                                  <VictoryZoomVoronoiContainer
+                                  <VictoryZoomVoronoiContainer voronoiDimension="x"
                                       zoomDimension="x"
                                       zoomDomain={this.state.zoomDomain}
                                       onZoomDomainChange={this.handleZoom.bind(this)}
