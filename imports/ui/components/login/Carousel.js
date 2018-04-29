@@ -21,11 +21,18 @@ export default class CarouselBar extends React.Component{
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item animateIn={true} animateOut={true}>
-                    <img width={900} height={250} className="img-responsive center-block" src="/images/rsz_crypto.jpg" />
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
+                    <img width={900} height={250} className="img-responsive center-block" src="/images/homepage.png" />
+                    {/*<Carousel.Caption>
+                        <h3 className="carouselcolor">Third slide label</h3>
+                        <p className="carouselcolor">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </Carousel.Caption>*/}
+                </Carousel.Item>
+                <Carousel.Item animateIn={true} animateOut={true}>
+                    <img width={900} height={250} className="img-responsive center-block" src="/images/D3.png" />
+                    {/*<Carousel.Caption>
+                        <h3 className="carouselcolor">Interactive Graphs</h3>
+                        <p className="carouselcolor">You can compare different crypto currencies using brushing feature</p>
+                    </Carousel.Caption>*/}
                 </Carousel.Item>
             </Carousel>
         );

@@ -127,9 +127,6 @@ export default class Home extends React.Component{
 
                            </Row>
                        </Grid>
-
-
-
                    </Jumbotron>
 
     );

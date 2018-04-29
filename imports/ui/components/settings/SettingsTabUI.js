@@ -16,9 +16,6 @@ export default class AccountsTabUI extends React.Component{
                     <Tab eventKey={2} title={<font-face><FaLimit /> Configure Limit</font-face>}>
                         <ConfigureLimit/>
                     </Tab>
-                    <Tab eventKey={3} title="Other" >
-
-                    </Tab>
                 </Tabs>
 
             </div>
