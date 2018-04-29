@@ -6,6 +6,7 @@ import CompHistViz from "./CompHistViz";
 import { Link } from "react-router"
 import { Button,Jumbotron,Grid,Row,Col,Panel,ButtonGroup,ButtonToolbar,ToggleButton,ToggleButtonGroup } from 'react-bootstrap';
 import PortfolioPerformance from "./PortfolioPerformance";
+import Iframe from "react-iframe";
 
 export default class Home extends React.Component{
     constructor () {
@@ -97,7 +98,14 @@ export default class Home extends React.Component{
                                                    <Panel.Heading>
                                                        <Panel.Title componentClass="h3">Voice I/O</Panel.Title>
                                                    </Panel.Heading>
-                                                   <Panel.Body/>
+                                                   <Panel.Body>
+                                                       <Iframe url="http://127.0.0.1:8080"
+                                                               height="170px"
+                                                               id="myId"
+                                                               className="myClassname"
+                                                               display="initial"
+                                                               position="relative"/>
+                                                   </Panel.Body>
                                                </Panel>
                                            </Col>
                                        </Row>
